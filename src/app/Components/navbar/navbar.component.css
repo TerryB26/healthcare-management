@@ -1,0 +1,41 @@
+.navbar {
+  background: #ffffff;
+  box-shadow: 0 2px 10px;
+  height: 80px;
+  font-family: 'Albert Sans', sans-serif;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+#brand-image {
+  margin-right: 50px;
+}
+
+@media (min-width:768px) {
+  .navbar-expand-md .navbar-nav {
+    flex-direction: row;
+  }
+}
+
+.navigation-item {
+  padding: 8px;
+}
+
+.selected-item {
+  background: #53a3c5;
+  border-radius: 10px;
+  color: rgb(255,255,255);
+}
+
+.profile-section {
+  display: none!important;
+}
+
+.img-profile {
+  margin-left: 10px;
+}
+
+.heading-title {
+  text-align: center;
+}
+
