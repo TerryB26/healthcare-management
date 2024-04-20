@@ -1,0 +1,14 @@
+.patients-table-div {
+  border-color: rgb(238,238,238);
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  margin-bottom: -20px;
+  padding-bottom: 0px;
+}
+
+.action-icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+

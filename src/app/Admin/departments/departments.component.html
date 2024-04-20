@@ -7,99 +7,28 @@
     <div>
       <div class="row">
         <div class="col">
-          <div>
+          <div *ngFor="let data of data.slice(0, 5)">
             <div class="department-card" style="box-shadow: 0 0 10px;">
-              <h1 class="department-name"><strong>Cardiology</strong></h1>
+              <h1 class="department-name"><strong> {{ data.department_name }}</strong></h1>
               <div class="d-flex justify-content-center align-items-center align-content-center"><img class="description-doctor" src="assets/img/doctor-info.png" width="100" height="100">
-                <p>Description<span style="font-weight: normal !important;">: The cardiology department specializes in the diagnosis and&nbsp;treatment of heart and cardiovascular diseases. Cardiologists and&nbsp;cardiovascular specialists provide care for patients with conditions&nbsp;such as coronary artery disease, heart failure, arrhythmias, and&nbsp;hypertension</span></p>
+                <p>Description<span style="font-weight: normal !important;">: {{ data.department_description }} </span></p>
               </div>
               <div class="text-center">
-                <p class="department-link">Find Out More</p>
+                <p class="department-link"><a class="nav-link" [routerLink]="['/Admin/Departments/', data.department_id]">Find Out More</a></p>
               </div>
             </div>
-            <div class="department-card" style="box-shadow: 0 0 10px;">
-              <h1 class="department-name"><strong>Cardiology</strong></h1>
-              <div class="d-flex justify-content-center align-items-center align-content-center"><img class="description-doctor" src="assets/img/doctor-info.png" width="100" height="100">
-                <p>Description<span style="font-weight: normal !important;">: The cardiology department specializes in the diagnosis and&nbsp;treatment of heart and cardiovascular diseases. Cardiologists and&nbsp;cardiovascular specialists provide care for patients with conditions&nbsp;such as coronary artery disease, heart failure, arrhythmias, and&nbsp;hypertension</span></p>
-              </div>
-              <div class="text-center">
-                <p class="department-link">Find Out More</p>
-              </div>
-            </div>
-            <div class="department-card" style="box-shadow: 0 0 10px;">
-              <h1 class="department-name"><strong>Cardiology</strong></h1>
-              <div class="d-flex justify-content-center align-items-center align-content-center"><img class="description-doctor" src="assets/img/doctor-info.png" width="100" height="100">
-                <p>Description<span style="font-weight: normal !important;">: The cardiology department specializes in the diagnosis and&nbsp;treatment of heart and cardiovascular diseases. Cardiologists and&nbsp;cardiovascular specialists provide care for patients with conditions&nbsp;such as coronary artery disease, heart failure, arrhythmias, and&nbsp;hypertension</span></p>
-              </div>
-              <div class="text-center">
-                <p class="department-link">Find Out More</p>
-              </div>
-            </div>
-            <div class="department-card" style="box-shadow: 0 0 10px;">
-              <h1 class="department-name"><strong>Cardiology</strong></h1>
-              <div class="d-flex justify-content-center align-items-center align-content-center"><img class="description-doctor" src="assets/img/doctor-info.png" width="100" height="100">
-                <p>Description<span style="font-weight: normal !important;">: The cardiology department specializes in the diagnosis and&nbsp;treatment of heart and cardiovascular diseases. Cardiologists and&nbsp;cardiovascular specialists provide care for patients with conditions&nbsp;such as coronary artery disease, heart failure, arrhythmias, and&nbsp;hypertension</span></p>
-              </div>
-              <div class="text-center">
-                <p class="department-link">Find Out More</p>
-              </div>
-            </div>
-            <div class="department-card" style="box-shadow: 0 0 10px;">
-              <h1 class="department-name"><strong>Cardiology</strong></h1>
-              <div class="d-flex justify-content-center align-items-center align-content-center"><img class="description-doctor" src="assets/img/doctor-info.png" width="100" height="100">
-                <p>Description<span style="font-weight: normal !important;">: The cardiology department specializes in the diagnosis and&nbsp;treatment of heart and cardiovascular diseases. Cardiologists and&nbsp;cardiovascular specialists provide care for patients with conditions&nbsp;such as coronary artery disease, heart failure, arrhythmias, and&nbsp;hypertension</span></p>
-              </div>
-              <div class="text-center">
-                <p class="department-link">Find Out More</p>
-              </div>
-            </div>
+
           </div>
         </div>
         <div class="col">
-          <div>
+          <div *ngFor="let data of data.slice(5, 11)">
             <div class="department-card" style="box-shadow: 0 0 10px;">
-              <h1 class="department-name"><strong>Cardiology</strong></h1>
+              <h1 class="department-name"><strong>{{ data.department_name }}</strong></h1>
               <div class="d-flex justify-content-center align-items-center align-content-center"><img class="description-doctor" src="assets/img/doctor-info.png" width="100" height="100">
-                <p>Description<span style="font-weight: normal !important;">: The cardiology department specializes in the diagnosis and&nbsp;treatment of heart and cardiovascular diseases. Cardiologists and&nbsp;cardiovascular specialists provide care for patients with conditions&nbsp;such as coronary artery disease, heart failure, arrhythmias, and&nbsp;hypertension</span></p>
+                <p>Description<span style="font-weight: normal !important;">: {{ data.department_description }}</span></p>
               </div>
               <div class="text-center">
-                <p class="department-link">Find Out More</p>
-              </div>
-            </div>
-            <div class="department-card" style="box-shadow: 0 0 10px;">
-              <h1 class="department-name"><strong>Cardiology</strong></h1>
-              <div class="d-flex justify-content-center align-items-center align-content-center"><img class="description-doctor" src="assets/img/doctor-info.png" width="100" height="100">
-                <p>Description<span style="font-weight: normal !important;">: The cardiology department specializes in the diagnosis and&nbsp;treatment of heart and cardiovascular diseases. Cardiologists and&nbsp;cardiovascular specialists provide care for patients with conditions&nbsp;such as coronary artery disease, heart failure, arrhythmias, and&nbsp;hypertension</span></p>
-              </div>
-              <div class="text-center">
-                <p class="department-link">Find Out More</p>
-              </div>
-            </div>
-            <div class="department-card" style="box-shadow: 0 0 10px;">
-              <h1 class="department-name"><strong>Cardiology</strong></h1>
-              <div class="d-flex justify-content-center align-items-center align-content-center"><img class="description-doctor" src="assets/img/doctor-info.png" width="100" height="100">
-                <p>Description<span style="font-weight: normal !important;">: The cardiology department specializes in the diagnosis and&nbsp;treatment of heart and cardiovascular diseases. Cardiologists and&nbsp;cardiovascular specialists provide care for patients with conditions&nbsp;such as coronary artery disease, heart failure, arrhythmias, and&nbsp;hypertension</span></p>
-              </div>
-              <div class="text-center">
-                <p class="department-link">Find Out More</p>
-              </div>
-            </div>
-            <div class="department-card" style="box-shadow: 0 0 10px;">
-              <h1 class="department-name"><strong>Cardiology</strong></h1>
-              <div class="d-flex justify-content-center align-items-center align-content-center"><img class="description-doctor" src="assets/img/doctor-info.png" width="100" height="100">
-                <p>Description<span style="font-weight: normal !important;">: The cardiology department specializes in the diagnosis and&nbsp;treatment of heart and cardiovascular diseases. Cardiologists and&nbsp;cardiovascular specialists provide care for patients with conditions&nbsp;such as coronary artery disease, heart failure, arrhythmias, and&nbsp;hypertension</span></p>
-              </div>
-              <div class="text-center">
-                <p class="department-link">Find Out More</p>
-              </div>
-            </div>
-            <div class="department-card" style="box-shadow: 0 0 10px;">
-              <h1 class="department-name"><strong>Cardiology</strong></h1>
-              <div class="d-flex justify-content-center align-items-center align-content-center"><img class="description-doctor" src="assets/img/doctor-info.png" width="100" height="100">
-                <p>Description<span style="font-weight: normal !important;">: The cardiology department specializes in the diagnosis and&nbsp;treatment of heart and cardiovascular diseases. Cardiologists and&nbsp;cardiovascular specialists provide care for patients with conditions&nbsp;such as coronary artery disease, heart failure, arrhythmias, and&nbsp;hypertension</span></p>
-              </div>
-              <div class="text-center">
-                <p class="department-link">Find Out More</p>
+                <p class="department-link"><a class="nav-link" [routerLink]="['/Admin/Departments/', data.department_id]">Find Out More</a></p>
               </div>
             </div>
           </div>

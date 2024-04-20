@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md">
   <div class="container-fluid">
     <div id="brand-image">
-      <img src="../assets/img/hospital-logo.png" width="110" height="100%">
+      <img src="assets/img/hospital-logo.png" width="110" height="100%">
     </div>
     <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
       <span class="visually-hidden">Toggle navigation</span
@@ -9,11 +9,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navcol-1">
       <ul class="list-inline navbar-nav">
-        <li class="list-inline-item navigation-item">Home</li>
-        <li class="list-inline-item navigation-item selected-item">Home</li>
-        <li class="list-inline-item navigation-item">Home</li>
-        <li class="list-inline-item navigation-item">Home</li>
-        <li class="list-inline-item navigation-item">Home</li>
+        <li class="list-inline-item navigation-item" routerLinkActive="selected-item" ><a class="nav-link" routerLink="/Admin/Dashboard">Home</a></li>
+        <li class="list-inline-item navigation-item" routerLinkActive="selected-item" ><a class="nav-link" routerLink="/Admin/Departments">Departments</a></li>
+        <li class="list-inline-item navigation-item" routerLinkActive="selected-item" ><a class="nav-link" routerLink="/Admin/Staff/Our-Doctors">Doctors</a></li>
+        <li class="list-inline-item navigation-item" routerLinkActive="selected-item" ><a class="nav-link" routerLink="/Admin/Staff/Our-Nurses">Nurses</a></li>
+        <li class="list-inline-item navigation-item" routerLinkActive="selected-item" ><a class="nav-link" routerLink="/Admin/Staff/Our-Patients">Patients</a></li>
+        <li class="list-inline-item navigation-item" routerLinkActive="selected-item" ><a class="nav-link" routerLink="/Patient/My-Appointments">Appointments</a></li>
+        <li class="list-inline-item navigation-item" routerLinkActive="selected-item" ><a class="nav-link" routerLink="/Patient/My-Prescriptions">Prescriptions</a></li>
       </ul>
       <ul class="list-inline ms-auto navbar-nav">
         <li class="list-inline-item navigation-item"><span>Dr. John Doe<img class="border rounded-circle img-profile" src="../assets/img/avatar1.jpeg" width="40"></span></li>

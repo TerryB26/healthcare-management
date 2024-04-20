@@ -1,19 +1,19 @@
 <app-navbar *ngIf="router.url !== '/Login' && router.url !== '/'"></app-navbar>
 <router-outlet></router-outlet>
 
-<h1>Form</h1>
 
-<div>
-  <form #dummyForm = 'ngForm' (submit) =onSubmit(dummyForm)>
-    <div class="form-control">
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" ngModel #name = 'ngModel' required>
-    </div>
 
-    <div class="form-control">
-      <label for="name">Surname</label>
-      <input type="text" id="surname" name="surname" ngModel #surname = 'ngModel' required>
-    </div>
-    <button type="submit">Submit</button>
-  </form>
-</div>
+<!--<div>-->
+<!--  <form #dummyForm = 'ngForm' (submit) =onSubmit(dummyForm)>-->
+<!--    <div class="form-control">-->
+<!--      <label for="name">Name</label>-->
+<!--      <input type="text" id="name" name="name" ngModel #name = 'ngModel' required>-->
+<!--    </div>-->
+
+<!--    <div class="form-control">-->
+<!--      <label for="name">Surname</label>-->
+<!--      <input type="text" id="surname" name="surname" ngModel #surname = 'ngModel' required>-->
+<!--    </div>-->
+<!--    <button type="submit">Submit</button>-->
+<!--  </form>-->
+<!--</div>-->

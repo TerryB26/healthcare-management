@@ -13,6 +13,12 @@ import { OurNursesComponent } from './Admin/our-nurses/our-nurses.component';
 import { OurDoctorsComponent } from './Admin/our-doctors/our-doctors.component';
 import { LoginComponent } from './Auth/login/login.component';
 import {FormsModule} from "@angular/forms";
+import { OurPatienceComponent } from './Admin/our-patience/our-patience.component';
+import { MyAppointmentsComponent } from './Patients/my-appointments/my-appointments.component';
+import { MyPrescriptionsComponent } from './Patients/my-prescriptions/my-prescriptions.component';
+import { AddAdminComponent } from './Admin/Add%Users/add-admin/add-admin.component';
+import { AddDoctorComponent } from './Admin/Users/add-doctor/add-doctor.component';
+import { AddNurseComponent } from './Admin/Users/add-nurse/add-nurse.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +30,13 @@ import {FormsModule} from "@angular/forms";
     DepDetailsComponent,
     OurNursesComponent,
     OurDoctorsComponent,
-    LoginComponent
+    LoginComponent,
+    OurPatienceComponent,
+    MyAppointmentsComponent,
+    MyPrescriptionsComponent,
+    AddAdminComponent,
+    AddDoctorComponent,
+    AddNurseComponent
   ],
     imports: [
         BrowserModule,
