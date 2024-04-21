@@ -18,16 +18,93 @@
               <h4 class="text-center" style="border-style: solid;border-color: rgb(238,238,238);background: rgb(238,238,238);">Nurse Details</h4>
               <div>
 
-                <form>
-                  <div class="form-div-area"><input class="form-control form-input" type="text" placeholder="Name" name="user_name" style="/*width: 500px;*/"></div>
-                  <div class="form-div-area"><input class="form-control form-input" type="text" placeholder="Surname" name="user_email" style="/*width: 500px;*/"></div>
-                  <div class="form-div-area"><input class="form-control form-input" type="text" placeholder="Surname" name="user_surname" style="/*width: 500px;*/"></div>
-                  <div class="form-div-area"><input class="form-control form-input" type="text" placeholder="Licence Number" name="nurse_license_number" style="/*width: 500px;*/"></div>
-                  <div class="form-div-area"><select class="form-select" name="role_id">
-                    <optgroup label="This is a group">
-                      <option value="12" selected="">This is item 1</option>
-                    </optgroup>
-                  </select></div><button class="btn btn-primary" type="button">Sign In</button>
+                <form #addNurseForm = 'ngForm' (submit) =onSubmit(addNurseForm)>
+                  <div class="form-div-area">
+                    <input class="form-control form-input"
+                           type="text"
+                           placeholder="Name"
+                           name="user_name"
+                           id="user_name"
+                           [(ngModel)]="userName"
+                           ngModel
+                           required
+                           #user_name="ngModel"
+                           >
+                  </div>
+
+                  <div class="form-div-area">
+                    <input class="form-control form-input"
+                           type="text"
+                           placeholder="Surname"
+                           name="user_surname"
+                           id="user_surname"
+                           [(ngModel)]="userSurname"
+                           (ngModelChange)="onUserSurnameChange()"
+                           ngModel
+                           required
+                           #user_surname="ngModel"
+                           >
+                  </div>
+
+                  <div class="form-div-area">
+                    <input class="form-control form-input"
+                           type="text"
+                           placeholder="Email Address"
+                           name="user_email"
+                           id="user_email"
+                           [(ngModel)]="userName + userSurnameFirstLetter + emailNum + baseEmail"
+                           ngModel
+                           required
+                           readonly
+                           #user_email="ngModel"
+                           >
+                  </div>
+
+                  <div class="form-div-area">
+                    <input class="form-control form-input"
+                           type="text"
+                           placeholder="License Number"
+                           name="nurse_license_number"
+                           id="nurse_license_number"
+                           ngModel
+                           required
+                           >
+                  </div>
+
+                  <div class="form-div-area">
+                    <select class="form-select"
+                            name="nurse_ward_id"
+                            id="nurse_ward_id"
+                            ngModel
+                            required
+                            #nurse_ward_id="ngModel">
+                      <option value="" disabled selected>Choose A Ward</option>
+                      <option
+                        *ngFor="let ward of wardsData"
+                        [value]="ward.ward_id"
+                        >{{ ward.ward_name }} -- {{ ward.department_name }}</option>
+                    </select>
+                  </div>
+
+                  <div class="form-div-area">
+                    <select class="form-select"
+                            name="role_id"
+                            id="role_id"
+                            ngModel
+                            required
+                            #role_id="ngModel">
+                      <option value="" disabled selected>Confirm Role</option>
+                      <option
+                        *ngFor="let role of rolesData"
+                        [value]="role.role_id"
+                        selected>{{ role.role_name }}</option>
+                    </select>
+                  </div>
+
+                  <button class="btn btn-primary add-admin-btn"
+                          type="submit"
+                          [hidden]="addNurseForm.invalid"
+                  >Add Nurse</button>
                 </form>
 
               </div>

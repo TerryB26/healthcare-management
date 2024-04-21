@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild, ElementRef, AfterViewInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
+
+import * as $ from 'jquery';
 
 
 function generateRandomNumber() {
@@ -15,6 +17,7 @@ function generateRandomNumber() {
 
 
 export class AddAdminComponent {
+
   constructor(private http: HttpClient) { }
   showSuccessMessage = false;
   userSurname = '';
@@ -28,6 +31,8 @@ export class AddAdminComponent {
   activeAccount = 1;
   lastUserData :any;
   lastActiveUser: number = 0;
+
+
 
   ngOnInit(): void {
     this.getData().subscribe(response => {
@@ -62,6 +67,7 @@ export class AddAdminComponent {
     this.http.post('http://localhost:2663/api/create-admins', formData).subscribe(response => {
       console.log(response);
       this.showSuccessMessage = true;
+
     }, error => {
       console.error(error);
       this.showSuccessMessage = false;
