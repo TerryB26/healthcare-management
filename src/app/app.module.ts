@@ -16,7 +16,7 @@ import {FormsModule} from "@angular/forms";
 import { OurPatienceComponent } from './Admin/our-patience/our-patience.component';
 import { MyAppointmentsComponent } from './Patients/my-appointments/my-appointments.component';
 import { MyPrescriptionsComponent } from './Patients/my-prescriptions/my-prescriptions.component';
-import { AddAdminComponent } from './Admin/Add%Users/add-admin/add-admin.component';
+import { AddAdminComponent } from './Admin/Users/add-admin/add-admin.component';
 import { AddDoctorComponent } from './Admin/Users/add-doctor/add-doctor.component';
 import { AddNurseComponent } from './Admin/Users/add-nurse/add-nurse.component';
 

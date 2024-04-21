@@ -16,6 +16,15 @@
         <li class="list-inline-item navigation-item" routerLinkActive="selected-item" ><a class="nav-link" routerLink="/Admin/Staff/Our-Patients">Patients</a></li>
         <li class="list-inline-item navigation-item" routerLinkActive="selected-item" ><a class="nav-link" routerLink="/Patient/My-Appointments">Appointments</a></li>
         <li class="list-inline-item navigation-item" routerLinkActive="selected-item" ><a class="nav-link" routerLink="/Patient/My-Prescriptions">Prescriptions</a></li>
+        <li class="list-inline-item navigation-item">
+            <div class="dropdown"><a class="nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Add User&nbsp;</a>
+              <div class="dropdown-menu"><a class="dropdown-item" routerLink="Admin/Create/Admin-Account">Admin</a>
+                <div class="dropdown-divider"></div><a class="dropdown-item" routerLink="/Admin/Create/Doctor-Account">Doctor</a>
+                <div class="dropdown-divider"></div><a class="dropdown-item" routerLink="/Admin/Create/Nurse-Account">Nurse</a>
+                <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Patient</a>
+              </div>
+            </div>
+        </li>
       </ul>
       <ul class="list-inline ms-auto navbar-nav">
         <li class="list-inline-item navigation-item"><span>Dr. John Doe<img class="border rounded-circle img-profile" src="../assets/img/avatar1.jpeg" width="40"></span></li>
