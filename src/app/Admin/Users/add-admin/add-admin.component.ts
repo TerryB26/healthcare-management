@@ -1,8 +1,7 @@
-import { Component,ViewChild, ElementRef, AfterViewInit} from '@angular/core';
+import {Component, ViewChild, ElementRef, AfterViewInit, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
-
-import * as $ from 'jquery';
+import {RandomReferenceService} from "../../../Services/random-reference.service";
 
 
 function generateRandomNumber() {
@@ -16,9 +15,14 @@ function generateRandomNumber() {
 })
 
 
-export class AddAdminComponent {
+export class AddAdminComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  userReferenceNum :any;
+
+  constructor(private http: HttpClient) {
+    let userReference = new RandomReferenceService();
+    this.userReferenceNum = userReference.GetRefNum("Admin");
+  }
   showSuccessMessage = false;
   userSurname = '';
   userName = '';
@@ -37,7 +41,6 @@ export class AddAdminComponent {
   ngOnInit(): void {
     this.getData().subscribe(response => {
       this.rolesData = response;
-      //console.log(this.rolesData);
     });
     this.getLastUserData().subscribe(response => {
       this.lastUserData = response;
@@ -58,7 +61,7 @@ export class AddAdminComponent {
     addAdminForm.value.user_id = this.lastActiveUser + 1;
     addAdminForm.value.user_password = this.dummyPassword;
     addAdminForm.value.is_active = this.activeAccount;
-    console.log(addAdminForm.value);
+    addAdminForm.value.user_reference = this.userReferenceNum;
     this.sendData(addAdminForm.value);
   }
 

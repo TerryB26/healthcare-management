@@ -19,6 +19,7 @@ import { MyPrescriptionsComponent } from './Patients/my-prescriptions/my-prescri
 import { AddAdminComponent } from './Admin/Users/add-admin/add-admin.component';
 import { AddDoctorComponent } from './Admin/Users/add-doctor/add-doctor.component';
 import { AddNurseComponent } from './Admin/Users/add-nurse/add-nurse.component';
+import { DoctorDetailsComponent } from './Doctors/doctor-details/doctor-details.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AddNurseComponent } from './Admin/Users/add-nurse/add-nurse.component';
     MyPrescriptionsComponent,
     AddAdminComponent,
     AddDoctorComponent,
-    AddNurseComponent
+    AddNurseComponent,
+    DoctorDetailsComponent
   ],
     imports: [
         BrowserModule,

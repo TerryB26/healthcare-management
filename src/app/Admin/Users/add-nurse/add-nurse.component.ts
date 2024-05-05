@@ -1,6 +1,7 @@
-import { Component,ViewChild, ElementRef, AfterViewInit} from '@angular/core';
+import {Component, ViewChild, ElementRef, AfterViewInit, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
+import {RandomReferenceService} from "../../../Services/random-reference.service";
 
 function generateRandomNumber() {
   return Math.floor(Math.random() * 9000) + 1;
@@ -11,8 +12,14 @@ function generateRandomNumber() {
   templateUrl: './add-nurse.component.html',
   styleUrls: ['./add-nurse.component.css']
 })
-export class AddNurseComponent {
-  constructor(private http: HttpClient) { }
+export class AddNurseComponent implements OnInit {
+
+  userReferenceNum :any;
+  constructor(private http: HttpClient) {
+    let userReference = new RandomReferenceService();
+    this.userReferenceNum = userReference.GetRefNum("Nurse");
+  }
+
   showSuccessMessage = false;
   userSurname = '';
   userName = '';
@@ -30,16 +37,13 @@ export class AddNurseComponent {
   ngOnInit(): void {
     this.getData().subscribe(response => {
       this.rolesData = response;
-      //console.log(this.rolesData);
     });
     this.getLastUserData().subscribe(response => {
       this.lastUserData = response;
       this.lastActiveUser = this.lastUserData[0].last_user;
-      //console.log("Last User: " + this.lastActiveUser);
     });
     this.getWards().subscribe(response => {
       this.wardsData = response;
-      console.log(this.wardsData);
     });
   }
 
@@ -58,6 +62,7 @@ export class AddNurseComponent {
     addNurseForm.value.user_id = this.lastActiveUser + 1;
     addNurseForm.value.user_password = this.dummyPassword;
     addNurseForm.value.is_active = this.activeAccount;
+    addNurseForm.value.user_reference = this.userReferenceNum;
     this.sendData(addNurseForm.value);
   }
 

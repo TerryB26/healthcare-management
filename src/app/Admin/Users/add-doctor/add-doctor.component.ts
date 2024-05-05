@@ -1,6 +1,7 @@
-import { Component,ViewChild, ElementRef, AfterViewInit} from '@angular/core';
+import {Component, ViewChild, ElementRef, AfterViewInit, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
+import {RandomReferenceService} from "../../../Services/random-reference.service";
 
 function generateRandomNumber() {
   return Math.floor(Math.random() * 9000) + 1;
@@ -11,8 +12,14 @@ function generateRandomNumber() {
   templateUrl: './add-doctor.component.html',
   styleUrls: ['./add-doctor.component.css']
 })
-export class AddDoctorComponent {
-  constructor(private http: HttpClient) { }
+export class AddDoctorComponent implements OnInit {
+
+  userReferenceNum :any;
+
+  constructor(private http: HttpClient) {
+    let userReference = new RandomReferenceService();
+    this.userReferenceNum = userReference.GetRefNum("Doctor");
+  }
   showSuccessMessage = false;
   userSurname = '';
   userName = '';
@@ -58,7 +65,7 @@ export class AddDoctorComponent {
     addDoctorForm.value.user_id = this.lastActiveUser + 1;
     addDoctorForm.value.user_password = this.dummyPassword;
     addDoctorForm.value.is_active = this.activeAccount;
-    //console.log(addDoctorForm.value);
+    addDoctorForm.value.user_reference = this.userReferenceNum;
     this.sendData(addDoctorForm.value);
   }
 

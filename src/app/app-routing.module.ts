@@ -12,6 +12,7 @@ import {MyPrescriptionsComponent} from "./Patients/my-prescriptions/my-prescript
 import {AddAdminComponent} from "./Admin/Users/add-admin/add-admin.component";
 import {AddDoctorComponent} from "./Admin/Users/add-doctor/add-doctor.component";
 import {AddNurseComponent} from "./Admin/Users/add-nurse/add-nurse.component";
+import {DoctorDetailsComponent} from "./Doctors/doctor-details/doctor-details.component";
 
 
 
@@ -31,6 +32,8 @@ const routes: Routes = [
   //Patient
   {path: 'Patient/My-Appointments', component: MyAppointmentsComponent},
   {path: 'Patient/My-Prescriptions', component: MyPrescriptionsComponent},
+  //Doctors
+  {path: 'Admin/Staff/Our-Doctors/:id', component: DoctorDetailsComponent},
 
 
 ];
