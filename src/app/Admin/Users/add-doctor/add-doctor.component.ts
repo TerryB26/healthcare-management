@@ -2,6 +2,8 @@ import {Component, ViewChild, ElementRef, AfterViewInit, OnInit} from '@angular/
 import {NgForm} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {RandomReferenceService} from "../../../Services/random-reference.service";
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 function generateRandomNumber() {
   return Math.floor(Math.random() * 9000) + 1;
@@ -16,7 +18,7 @@ export class AddDoctorComponent implements OnInit {
 
   userReferenceNum :any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     let userReference = new RandomReferenceService();
     this.userReferenceNum = userReference.GetRefNum("Doctor");
   }
@@ -46,14 +48,23 @@ export class AddDoctorComponent implements OnInit {
     });
     this.getWards().subscribe(response => {
       this.wardsData = response;
-      //console.log(this.wardsData);
+
     });
   }
 
   sendData(formData: any) {
     this.http.post('http://localhost:2663/api/create-doctors', formData).subscribe(response => {
-      console.log(response);
-      this.showSuccessMessage = true;
+      Swal.fire({
+        title: 'Success!',
+        text: 'Successfully added a new Doctor',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2500
+      }).then(() => {
+        this.router.navigate(['/Admin/Staff/Our-Doctors']);
+      });
+
+
 
     }, error => {
       console.error(error);

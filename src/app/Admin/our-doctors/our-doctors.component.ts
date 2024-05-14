@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-our-doctors',
@@ -8,12 +9,13 @@ import {HttpClient} from "@angular/common/http";
 })
 export class OurDoctorsComponent implements OnInit {
   doctors: any = [];
+  doctor_id: any;
+  user_id: any;
 
   constructor(private http: HttpClient) { }
   ngOnInit(): void {
     this.getData().subscribe(response => {
       this.doctors = response;
-      console.log(this.doctors);
     });
   }
 
@@ -22,7 +24,25 @@ export class OurDoctorsComponent implements OnInit {
   }
 
 
-  deleteDoctor(user_id: any) {
-    console.log(user_id);
+  deleteDoctor(param: { doctor_id: any; user_id: any; }) {
+    const { user_id, doctor_id } = param;
+      this.http.delete(`http://localhost:2663/api/delete-doctor/${user_id}/${doctor_id}`).subscribe(response => {
+        Swal.fire({
+          title: 'Success!',
+          text: 'Successfully Removed Record',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1750
+        })
+
+
+        // Refresh the list of doctors after successful deletion
+        this.getData().subscribe(response => {
+          this.doctors = response;
+        });
+      }, error => {
+        console.error(error);
+      });
+
+    }
   }
-}

@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit{
+  user: any;
   usersData :any;
   departmentsData :any;
 
@@ -18,9 +19,11 @@ export class DashboardComponent implements OnInit{
   numOfWards :number = 0;
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
+
     this.getUserStats().subscribe(response => {
       this.usersData = response;
       this.numOfNurses = this.usersData[0].nurses;

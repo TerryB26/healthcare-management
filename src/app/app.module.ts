@@ -20,6 +20,8 @@ import { AddAdminComponent } from './Admin/Users/add-admin/add-admin.component';
 import { AddDoctorComponent } from './Admin/Users/add-doctor/add-doctor.component';
 import { AddNurseComponent } from './Admin/Users/add-nurse/add-nurse.component';
 import { DoctorDetailsComponent } from './Doctors/doctor-details/doctor-details.component';
+import { NurseDetailsComponent } from './Nurses/nurse-details/nurse-details.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -38,13 +40,15 @@ import { DoctorDetailsComponent } from './Doctors/doctor-details/doctor-details.
     AddAdminComponent,
     AddDoctorComponent,
     AddNurseComponent,
-    DoctorDetailsComponent
+    DoctorDetailsComponent,
+    NurseDetailsComponent
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        FormsModule
+        FormsModule,
+      SweetAlert2Module.forRoot(),
     ],
   providers: [],
   bootstrap: [AppComponent]
