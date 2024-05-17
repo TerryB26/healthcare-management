@@ -20,4 +20,13 @@ export class AuthService {
     };
     return this.http.post<any>(this.loginUrl, { email, password }, httpOptions);
   }
+
+  logout() {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+  }
+
+  isLoggedIn(): boolean {
+    return localStorage.getItem('user') !== null && localStorage.getItem('token') !== null;
+  }
 }

@@ -22,6 +22,10 @@ role: string | null = null;
     if (loginForm.valid) {
       const { email, password } = loginForm.value;
       this.authService.login(email, password).subscribe(response => {
+        const { user,token } = response;
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('token', token);
+
         this.role = this.emailRoleService.getRoleFromEmail(email)
         Swal.fire({
           title: 'Success!',

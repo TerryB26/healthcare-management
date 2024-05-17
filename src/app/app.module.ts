@@ -22,6 +22,11 @@ import { AddNurseComponent } from './Admin/Users/add-nurse/add-nurse.component';
 import { DoctorDetailsComponent } from './Doctors/doctor-details/doctor-details.component';
 import { NurseDetailsComponent } from './Nurses/nurse-details/nurse-details.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { DoctorDashboardComponent } from './Doctors/doctor-dashboard/doctor-dashboard.component';
+import { NurseDashboardComponent } from './Nurses/nurse-dashboard/nurse-dashboard.component';
+import { PatientDashboardComponent } from './Patients/patient-dashboard/patient-dashboard.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -41,7 +46,10 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     AddDoctorComponent,
     AddNurseComponent,
     DoctorDetailsComponent,
-    NurseDetailsComponent
+    NurseDetailsComponent,
+    DoctorDashboardComponent,
+    NurseDashboardComponent,
+    PatientDashboardComponent
   ],
     imports: [
         BrowserModule,
@@ -50,7 +58,9 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
         FormsModule,
       SweetAlert2Module.forRoot(),
     ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -27,7 +27,8 @@
         </li>
       </ul>
       <ul class="list-inline ms-auto navbar-nav">
-        <li class="list-inline-item navigation-item"><span>Dr. John Doe<img class="border rounded-circle img-profile" src="../assets/img/avatar1.jpeg" width="40"></span></li>
+        <li class="list-inline-item navigation-item"><span>{{user.user_name}} {{user.user_surname}}<img class="border rounded-circle img-profile" src="assets/img/avatar1.jpeg" width="40"></span></li>
+        <li class="list-inline-item navigation-item icon-actions"><span><i class="fa fa-sign-out" (click)="logout()" data-bs-toggle="tooltip" data-bss-tooltip="" style="font-size: 22px;margin-top: 5px;" title="Logout"></i></span></li>
       </ul>
     </div>
   </div>
