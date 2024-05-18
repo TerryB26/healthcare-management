@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private loginUrl = 'https://hms-app-api-2956ac269d76.herokuapp.com/api/login';
+  private loginUrl = `${environment.baseUrl}api/login`;
 
   constructor(private http: HttpClient) { }
 
