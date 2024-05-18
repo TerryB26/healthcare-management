@@ -98,6 +98,6 @@ export class AddNurseComponent implements OnInit {
   }
 
   private getLastUserData() {
-    return this.http.get(`${environment.baseUrl}/last-active-user`);
+    return this.http.get(`${environment.baseUrl}api/last-active-user`);
   }
 }

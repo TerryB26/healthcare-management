@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-nurse-details',
@@ -19,7 +20,7 @@ export class NurseDetailsComponent {
   }
 
   getnurseDetails(id: string): void {
-    this.http.get(`http://localhost:2663/api/nurse-details/${id}`).subscribe(response => {
+    this.http.get(`${environment.baseUrl}api/nurse-details/${id}`).subscribe(response => {
       this.nurseDetails = response;
       console.log(this.nurseDetails);
     }, error => {

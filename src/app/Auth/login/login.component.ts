@@ -35,7 +35,15 @@ role: string | null = null;
           showConfirmButton: false,
           timer: 2500
         }).then(() => {
-          this.router.navigate([this.role === 'admin' ? '/Admin/Dashboard' : '/user'])
+          if (this.role === 'admin') {
+            this.router.navigate(['/Admin/Dashboard']);
+          } else if (this.role === 'nurse') {
+            this.router.navigate(['/Nurse/Dashboard']);
+          } else if (this.role === 'doctor') {
+            this.router.navigate(['/Doctor/Dashboard']);
+          } else {
+            this.router.navigate(['/user']);
+          }
         });
         console.log(this.role);
       }, error => {
