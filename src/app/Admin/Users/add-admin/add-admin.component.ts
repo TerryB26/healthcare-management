@@ -1,7 +1,7 @@
-import {Component, ViewChild, ElementRef, AfterViewInit, OnInit} from '@angular/core';
-import {NgForm} from "@angular/forms";
-import {HttpClient} from "@angular/common/http";
-import {RandomReferenceService} from "../../../Services/random-reference.service";
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from "@angular/forms";
+import { HttpClient } from "@angular/common/http";
+import { RandomReferenceService } from "../../../Services/random-reference.service";
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
@@ -14,30 +14,26 @@ function generateRandomNumber() {
   templateUrl: './add-admin.component.html',
   styleUrls: ['./add-admin.component.css']
 })
-
-
 export class AddAdminComponent implements OnInit {
-
-  userReferenceNum :any;
-
-  constructor(private http: HttpClient, private router: Router) {
-    let userReference = new RandomReferenceService();
-    this.userReferenceNum = userReference.GetRefNum("Admin");
-  }
+  userReferenceNum: any;
   showSuccessMessage = false;
   userSurname = '';
   userName = '';
   emailNum = generateRandomNumber();
   userSurnameFirstLetter = '';
   roleName = 'admin';
-  baseEmail = '@'+this.roleName+'-hospital.co.za';
-  rolesData :any;
+  baseEmail = '@' + this.roleName + '-hospital.co.za';
+  rolesData: any;
   dummyPassword = 1234;
   activeAccount = 1;
-  lastUserData :any;
+  lastUserData: any;
   lastActiveUser: number = 0;
+  fullEmail = '';
 
-
+  constructor(private http: HttpClient, private router: Router) {
+    let userReference = new RandomReferenceService();
+    this.userReferenceNum = userReference.GetRefNum("Admin");
+  }
 
   ngOnInit(): void {
     this.getData().subscribe(response => {
@@ -46,7 +42,6 @@ export class AddAdminComponent implements OnInit {
     this.getLastUserData().subscribe(response => {
       this.lastUserData = response;
       this.lastActiveUser = this.lastUserData[0].last_user;
-      //console.log(this.lastActiveUser);
     });
   }
 
@@ -56,6 +51,11 @@ export class AddAdminComponent implements OnInit {
 
   onUserSurnameChange() {
     this.userSurnameFirstLetter = this.userSurname[0];
+    this.updateFullEmail();
+  }
+
+  onUserNameChange() {
+    this.updateFullEmail();
   }
 
   onSubmit(addAdminForm: NgForm) {
@@ -63,10 +63,14 @@ export class AddAdminComponent implements OnInit {
     addAdminForm.value.user_password = this.dummyPassword;
     addAdminForm.value.is_active = this.activeAccount;
     addAdminForm.value.user_reference = this.userReferenceNum;
+    addAdminForm.value.user_email = this.fullEmail;
     this.sendData(addAdminForm.value);
   }
 
-  //Send data to the server
+  updateFullEmail() {
+    this.fullEmail = `${this.userName}${this.userSurnameFirstLetter}${this.emailNum}${this.baseEmail}`;
+  }
+
   sendData(formData: any) {
     this.http.post('http://localhost:2663/api/create-admins', formData).subscribe(response => {
       Swal.fire({
@@ -78,7 +82,6 @@ export class AddAdminComponent implements OnInit {
       }).then(() => {
         this.router.navigate(['/Admin/Dashboard']);
       });
-
     }, error => {
       console.error(error);
       this.showSuccessMessage = false;

@@ -10,7 +10,8 @@
     <div class="row">
       <div class="col-md-6">
         <section style="text-align: center">
-          <img src="assets/img/hospital3.png" width="370" height="370"></section>
+          <img src="assets/img/hospital3.png" width="370" height="370">
+        </section>
       </div>
       <div class="col-md-6">
         <section>
@@ -18,7 +19,7 @@
             <div style="border-color: rgb(238,238,238);border-right-style: solid;border-bottom-style: solid;border-left-style: solid;padding-bottom: 0;width: inherit;">
               <h4 class="text-center" style="border-style: solid;border-color: rgb(238,238,238);background: rgb(238,238,238);">Admin Details</h4>
               <div>
-                <form #addAdminForm = 'ngForm' (submit) =onSubmit(addAdminForm)>
+                <form #addAdminForm="ngForm" (ngSubmit)="onSubmit(addAdminForm)">
                   <div class="form-div-area">
                     <input class="form-control form-input"
                            type="text"
@@ -26,12 +27,11 @@
                            name="user_name"
                            id="user_name"
                            [(ngModel)]="userName"
-                           ngModel
+                           (ngModelChange)="onUserNameChange()"
                            required
                            #user_name="ngModel"
                            style="/*width: 500px;*/">
                   </div>
-
                   <div class="form-div-area">
                     <input class="form-control form-input"
                            type="text"
@@ -40,28 +40,22 @@
                            id="user_surname"
                            [(ngModel)]="userSurname"
                            (ngModelChange)="onUserSurnameChange()"
-                           ngModel
                            required
                            #user_surname="ngModel"
                            style="/*width: 500px;*/">
                   </div>
-
-
-
                   <div class="form-div-area">
                     <input class="form-control form-input"
                            type="text"
                            placeholder="Email Address"
                            name="user_email"
                            id="user_email"
-                            [(ngModel)]="userName + userSurnameFirstLetter + emailNum + baseEmail"
-                           ngModel
-                           required
+                           [(ngModel)]="fullEmail"
                            readonly
+                           required
                            #user_email="ngModel"
                            style="/*width: 500px;*/">
                   </div>
-
                   <div class="form-div-area">
                     <select class="form-select"
                             name="role_id"
@@ -69,18 +63,14 @@
                             ngModel
                             required
                             #role_id="ngModel">
-                        <option
-                          *ngFor="let role of rolesData"
-                          [value]="role.role_id"
-                          selected="">{{ role.role_name }}</option>
-
-                  </select>
-
+                      <option *ngFor="let role of rolesData"
+                              [value]="role.role_id"
+                              selected="">{{ role.role_name }}</option>
+                    </select>
                   </div>
                   <button class="btn btn-primary add-admin-btn form-btn"
                           type="submit"
-                          [disabled]="addAdminForm.invalid"
-                  >Add Admin</button>
+                          [disabled]="addAdminForm.invalid">Add Admin</button>
                 </form>
               </div>
             </div>

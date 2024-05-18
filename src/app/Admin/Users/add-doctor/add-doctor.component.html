@@ -8,7 +8,8 @@
     <div class="row">
       <div class="col-md-6">
         <section style="text-align: center">
-          <img src="assets/img/doctor.png" width="250" height="370"></section>
+          <img src="assets/img/doctor.png" width="250" height="370">
+        </section>
       </div>
       <div class="col-md-6">
         <section>
@@ -16,8 +17,7 @@
             <div style="border-color: rgb(238,238,238);border-right-style: solid;border-bottom-style: solid;border-left-style: solid;padding-bottom: 0;width: 500px;">
               <h4 class="text-center" style="border-style: solid;border-color: rgb(238,238,238);background: rgb(238,238,238);">Doctor Details</h4>
               <div>
-
-                <form #addDoctorForm = 'ngForm' (submit) =onSubmit(addDoctorForm)>
+                <form #addDoctorForm="ngForm" (ngSubmit)="onSubmit(addDoctorForm)">
                   <div class="form-div-area">
                     <input class="form-control form-input"
                            type="text"
@@ -25,7 +25,7 @@
                            name="user_name"
                            id="user_name"
                            [(ngModel)]="userName"
-                           ngModel
+                           (ngModelChange)="onUserNameChange()"
                            required
                            #user_name="ngModel">
                   </div>
@@ -37,7 +37,6 @@
                            id="user_surname"
                            [(ngModel)]="userSurname"
                            (ngModelChange)="onUserSurnameChange()"
-                           ngModel
                            required
                            #user_surname="ngModel">
                   </div>
@@ -47,10 +46,9 @@
                            placeholder="Email Address"
                            name="user_email"
                            id="user_email"
-                           [(ngModel)]="userName + userSurnameFirstLetter + emailNum + baseEmail"
-                           ngModel
-                           required
+                           [(ngModel)]="fullEmail"
                            readonly
+                           required
                            #user_email="ngModel">
                   </div>
                   <div class="form-div-area">
@@ -60,10 +58,8 @@
                            name="doctor_license_number"
                            id="doctor_license_number"
                            ngModel
-                           required
-                    >
+                           required>
                   </div>
-
                   <div class="form-div-area">
                     <select class="form-select"
                             name="doctor_ward_id"
@@ -72,13 +68,10 @@
                             required
                             #doctor_ward_id="ngModel">
                       <option value="" disabled selected>Choose A Ward</option>
-                      <option
-                        *ngFor="let ward of wardsData"
-                        [value]="ward.ward_id"
-                      >{{ ward.ward_name }} -- {{ ward.department_name }}</option>
+                      <option *ngFor="let ward of wardsData"
+                              [value]="ward.ward_id">{{ ward.ward_name }} -- {{ ward.department_name }}</option>
                     </select>
                   </div>
-
                   <div class="form-div-area">
                     <select class="form-select"
                             name="role_id"
@@ -87,16 +80,12 @@
                             required
                             #role_id="ngModel">
                       <option value="" disabled selected>Confirm Role</option>
-                      <option
-                        *ngFor="let role of rolesData"
-                        [value]="role.role_id"
-                        selected>{{ role.role_name }}</option>
+                      <option *ngFor="let role of rolesData"
+                              [value]="role.role_id">{{ role.role_name }}</option>
                     </select>
                   </div>
-
                   <button class="btn btn-primary form-btn" type="submit" [disabled]="addDoctorForm.invalid">Add Doctor</button>
                 </form>
-
               </div>
             </div>
           </div>
