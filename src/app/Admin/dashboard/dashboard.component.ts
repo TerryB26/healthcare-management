@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -39,11 +40,11 @@ export class DashboardComponent implements OnInit{
   }
 
   getUserStats() {
-    return this.http.get('http://localhost:2663/api/user-stats');
+    return this.http.get(`${environment.baseUrl}api/user-stats`);
   }
 
   getDepStats() {
-    return this.http.get('http://localhost:2663/api/total-dep-wards');
+    return this.http.get(`${environment.baseUrl}api/total-dep-wards`);
   }
 
 }

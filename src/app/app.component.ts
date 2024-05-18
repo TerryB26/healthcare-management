@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { Router } from '@angular/router';
 import {NgForm} from "@angular/forms";
+import { environment } from '../environments/environment';
 
 
 
@@ -27,7 +28,7 @@ export class AppComponent implements OnInit{
 
 
 
-    this.http.post('http://localhost:2663/api/send-email', emailData).subscribe(response => {
+    this.http.post(`${environment.baseUrl}api/send-email`, emailData).subscribe(response => {
       console.log(response);
     }, error => {
       console.error(error);

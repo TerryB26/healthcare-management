@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class DepDetailsComponent implements OnInit {
   }
 
   getData(id: string): void {
-    this.http.get(`http://localhost:2663/api/department-details/${id}`).subscribe(response => {
+    this.http.get(`${environment.baseUrl}api/department-details/${id}`).subscribe(response => {
       this.data = response;
       console.log(this.data);
     }, error => {

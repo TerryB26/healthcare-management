@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { RandomReferenceService } from "../../../Services/random-reference.service";
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 function generateRandomNumber() {
   return Math.floor(Math.random() * 9000) + 1;
@@ -46,7 +47,7 @@ export class AddAdminComponent implements OnInit {
   }
 
   getData() {
-    return this.http.get(`http://localhost:2663/api/role/${this.roleName}`);
+    return this.http.get(`${environment.baseUrl}api/role/${this.roleName}`);
   }
 
   onUserSurnameChange() {
@@ -72,7 +73,7 @@ export class AddAdminComponent implements OnInit {
   }
 
   sendData(formData: any) {
-    this.http.post('http://localhost:2663/api/create-admins', formData).subscribe(response => {
+    this.http.post(`${environment.baseUrl}api/create-admins`, formData).subscribe(response => {
       Swal.fire({
         title: 'Success!',
         text: 'Successfully Added A New Admin',
@@ -89,6 +90,6 @@ export class AddAdminComponent implements OnInit {
   }
 
   private getLastUserData() {
-    return this.http.get('http://localhost:2663/api/last-active-user');
+    return this.http.get(`${environment.baseUrl}api/last-active-user`);
   }
 }

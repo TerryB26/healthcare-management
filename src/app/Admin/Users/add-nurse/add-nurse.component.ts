@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { RandomReferenceService } from "../../../Services/random-reference.service";
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 function generateRandomNumber() {
   return Math.floor(Math.random() * 9000) + 1;
@@ -50,11 +51,11 @@ export class AddNurseComponent implements OnInit {
   }
 
   getData() {
-    return this.http.get(`http://localhost:2663/api/role/${this.roleName}`);
+    return this.http.get(`${environment.baseUrl}api/role/${this.roleName}`);
   }
 
   getWards() {
-    return this.http.get('http://localhost:2663/api/department-wards');
+    return this.http.get(`${environment.baseUrl}api/department-wards`);
   }
 
   onUserSurnameChange() {
@@ -80,7 +81,7 @@ export class AddNurseComponent implements OnInit {
   }
 
   sendData(formData: any) {
-    this.http.post('http://localhost:2663/api/create-nurses', formData).subscribe(response => {
+    this.http.post(`${environment.baseUrl}api/create-nurses`, formData).subscribe(response => {
       Swal.fire({
         title: 'Success!',
         text: 'Successfully Added A New Nurse',
@@ -97,6 +98,6 @@ export class AddNurseComponent implements OnInit {
   }
 
   private getLastUserData() {
-    return this.http.get('http://localhost:2663/api/last-active-user');
+    return this.http.get(`${environment.baseUrl}/last-active-user`);
   }
 }

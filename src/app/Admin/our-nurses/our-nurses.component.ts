@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-our-nurses',
@@ -14,20 +15,19 @@ export class OurNursesComponent {
   constructor(private http: HttpClient) { }
   ngOnInit(): void {
     this.getData().subscribe(response => {
-      this.nurses = response;console.log("🚀 ~ app.get ~ nurses:", this.nurses)
-
+      this.nurses = response;
     });
   }
 
   getData() {
-    return this.http.get('http://localhost:2663/api/nurses');
+    return this.http.get(`${environment.baseUrl}api/nurses`);
 
   }
 
 
   deleteNurse(param: { nurse_id: any; user_id: any; }) {
     const { user_id, nurse_id } = param;
-    this.http.delete(`http://localhost:2663/api/delete-nurse/${user_id}/${nurse_id}`).subscribe(response => {
+    this.http.delete(`${environment.baseUrl}api/delete-nurse/${user_id}/${nurse_id}`).subscribe(response => {
       console.log(response);
       // Refresh the list of nurses after successful deletion
       this.getData().subscribe(response => {

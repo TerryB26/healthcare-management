@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-doctor-details',
@@ -19,7 +20,7 @@ export class DoctorDetailsComponent implements OnInit {
   }
 
   getDoctorDetails(id: string): void {
-    this.http.get(`http://localhost:2663/api/doctor-details/${id}`).subscribe(response => {
+    this.http.get(`${environment.baseUrl}api/doctor-details/${id}`).subscribe(response => {
       this.doctorDetails = response;
       console.log(this.doctorDetails);
     }, error => {

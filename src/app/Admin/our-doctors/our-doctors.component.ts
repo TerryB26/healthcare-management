@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import Swal from "sweetalert2";
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-our-doctors',
@@ -20,13 +21,13 @@ export class OurDoctorsComponent implements OnInit {
   }
 
   getData() {
-    return this.http.get('http://localhost:2663/api/doctors');
+    return this.http.get(`${environment.baseUrl}api/doctors`);
   }
 
 
   deleteDoctor(param: { doctor_id: any; user_id: any; }) {
     const { user_id, doctor_id } = param;
-      this.http.delete(`http://localhost:2663/api/delete-doctor/${user_id}/${doctor_id}`).subscribe(response => {
+      this.http.delete(`${environment.baseUrl}api/delete-doctor/${user_id}/${doctor_id}`).subscribe(response => {
         Swal.fire({
           title: 'Success!',
           text: 'Successfully Removed Record',

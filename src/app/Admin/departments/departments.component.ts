@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-departments',
@@ -20,7 +21,7 @@ export class DepartmentsComponent implements OnInit {
   }
 
   getData() {
-    return this.http.get('http://localhost:2663/api/hospital-departments');
+    return this.http.get(`${environment.baseUrl}api/hospital-departments`);
   }
 
 
