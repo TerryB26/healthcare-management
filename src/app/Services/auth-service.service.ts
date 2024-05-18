@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private loginUrl = 'http://localhost:2663/api/login';
+  private loginUrl = 'https://hms-app-api-2956ac269d76.herokuapp.com/api/login';
 
   constructor(private http: HttpClient) { }
 
