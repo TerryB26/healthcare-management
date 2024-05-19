@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from "@angular/forms";
+import {FormControl, NgForm, Validators} from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
 import { RandomReferenceService } from "../../../Services/random-reference.service";
 import Swal from 'sweetalert2';
@@ -56,6 +56,7 @@ export class AddAdminComponent implements OnInit {
   }
 
   onUserNameChange() {
+    this.userName = this.userName.replace(/\s/g, '');
     this.updateFullEmail();
   }
 

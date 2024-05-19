@@ -12,7 +12,7 @@ import { DepDetailsComponent } from './Admin/dep-details/dep-details.component';
 import { OurNursesComponent } from './Admin/our-nurses/our-nurses.component';
 import { OurDoctorsComponent } from './Admin/our-doctors/our-doctors.component';
 import { LoginComponent } from './Auth/login/login.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { OurPatienceComponent } from './Admin/our-patience/our-patience.component';
 import { MyAppointmentsComponent } from './Patients/my-appointments/my-appointments.component';
 import { MyPrescriptionsComponent } from './Patients/my-prescriptions/my-prescriptions.component';
@@ -56,7 +56,8 @@ import { AuthInterceptor } from './auth.interceptor';
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
-      SweetAlert2Module.forRoot(),
+        SweetAlert2Module.forRoot(),
+        ReactiveFormsModule,
     ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
