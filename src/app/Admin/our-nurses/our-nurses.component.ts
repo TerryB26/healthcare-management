@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { environment } from '../../../environments/environment';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-our-nurses',
@@ -16,6 +17,7 @@ export class OurNursesComponent {
   ngOnInit(): void {
     this.getData().subscribe(response => {
       this.nurses = response;
+      console.log(this.nurses)
     });
   }
 
@@ -28,7 +30,13 @@ export class OurNursesComponent {
   deleteNurse(param: { nurse_id: any; user_id: any; }) {
     const { user_id, nurse_id } = param;
     this.http.delete(`${environment.baseUrl}api/delete-nurse/${user_id}/${nurse_id}`).subscribe(response => {
-      console.log(response);
+      Swal.fire({
+        title: 'Success!',
+        text: 'Successfully Removed Record',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1750
+      })
       // Refresh the list of nurses after successful deletion
       this.getData().subscribe(response => {
         this.nurses = response;

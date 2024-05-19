@@ -27,6 +27,7 @@ export class OurDoctorsComponent implements OnInit {
 
   deleteDoctor(param: { doctor_id: any; user_id: any; }) {
     const { user_id, doctor_id } = param;
+
       this.http.delete(`${environment.baseUrl}api/delete-doctor/${user_id}/${doctor_id}`).subscribe(response => {
         Swal.fire({
           title: 'Success!',

@@ -9,11 +9,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navcol-1">
       <ul class="list-inline navbar-nav">
-        <li class="list-inline-item navigation-item" routerLinkActive="selected-item" ><a class="nav-link" routerLink="/Admin/Dashboard">Home</a></li>
+        <li class="list-inline-item navigation-item" routerLinkActive="selected-item" ><a class="nav-link" routerLink="/{{user.role_name}}/Dashboard">Home</a></li>
         <li class="list-inline-item navigation-item" routerLinkActive="selected-item" ><a class="nav-link" routerLink="/Admin/Departments">Departments</a></li>
-        <li class="list-inline-item navigation-item" routerLinkActive="selected-item" *ngIf="user.role_id === 1"><a class="nav-link" routerLink="/Admin/Staff/Our-Doctors">Doctors</a></li>
-        <li class="list-inline-item navigation-item" routerLinkActive="selected-item" *ngIf="user.role_id === 1"><a class="nav-link" routerLink="/Admin/Staff/Our-Nurses">Nurses</a></li>
-        <li class="list-inline-item navigation-item" routerLinkActive="selected-item" *ngIf="user.role_id === 1"><a class="nav-link" routerLink="/Admin/Staff/Our-Patients">Patients</a></li>
+        <li class="list-inline-item navigation-item" routerLinkActive="selected-item" *ngIf="user.role_id === 1"><a class="nav-link" routerLink="/{{user.role_name}}/Staff/Our-Doctors">Doctors</a></li>
+        <li class="list-inline-item navigation-item" routerLinkActive="selected-item" *ngIf="user.role_id === 1"><a class="nav-link" routerLink="/{{user.role_name}}/Staff/Our-Nurses">Nurses</a></li>
+        <li class="list-inline-item navigation-item" routerLinkActive="selected-item" *ngIf="user.role_id === 1"><a class="nav-link" routerLink="/{{user.role_name}}/Staff/Our-Patients">Patients</a></li>
         <li class="list-inline-item navigation-item" routerLinkActive="selected-item" *ngIf="user.role_id === 1"><a class="nav-link" routerLink="/Patient/My-Appointments">Appointments</a></li>
         <li class="list-inline-item navigation-item" routerLinkActive="selected-item" *ngIf="user.role_id === 1"><a class="nav-link" routerLink="/Patient/My-Prescriptions">Prescriptions</a></li>
         <li class="list-inline-item navigation-item" *ngIf="user.role_id === 1">

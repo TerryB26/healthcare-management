@@ -4,7 +4,7 @@
       <div class="col">
           <section>
               <div class="dropdown button-drop">
-                <button class="btn btn-primary dropdown-toggle button-dropdown" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="background: rgba(108,131,193,0.5);">Action</button>
+<!--                <button  class="btn btn-primary dropdown-toggle button-dropdown" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="background: rgba(108,131,193,0.5);">Action</button>-->
                   <div class="dropdown-menu" style="background: rgb(108,131,193);color: var(--bs-secondary-bg);"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
               </div>
           </section>
@@ -12,27 +12,31 @@
               <div class="col"><a href="#" style="color: inherit;text-decoration: none;" data-bs-target="#listOfPatients" data-bs-toggle="modal">
                       <div data-bss-hover-animate="pulse" class="card-1" style="background: rgba(108,131,193,0.5);">
                           <h5 class="card-1-text" style="font-size: 18px;">Patients In Ward</h5>
-                          <h1 class="card-1-info">5</h1>
+                          <h1 class="card-1-info">-</h1>
                       </div>
-                  </a></div>
-              <div class="col">
+                  </a>
+              </div>
+              <div class="col"><a href="#" style="color: inherit;text-decoration: none;" data-bs-target="#listOfNurses" data-bs-toggle="modal">
                   <div data-bss-hover-animate="pulse" class="card-1" style="background: rgba(108,131,193,0.5);">
                       <h5 class="card-1-text" style="font-size: 18px;">Nurses In Ward</h5>
-                      <h1 class="card-1-info">5</h1>
+                      <h1 class="card-1-info">{{nurseCount}}</h1>
+
                   </div>
+              </a>
               </div>
           </div>
           <div class="row card-section" style="border-style: none;">
-              <div class="col">
+              <div class="col"><a href="#" style="color: inherit;text-decoration: none;" data-bs-target="#listOfDoctors" data-bs-toggle="modal">
                   <div data-bss-hover-animate="pulse" class="card-1" style="background: rgba(108,131,193,0.5);">
                       <h5 class="card-1-text" style="font-size: 18px;">Doctors In Ward</h5>
-                      <h1 class="card-1-info">5</h1>
+                      <h1 class="card-1-info">{{doctorCount}}</h1>
                   </div>
+                </a>
               </div>
               <div class="col">
                   <div data-bss-hover-animate="pulse" class="card-1" style="background: rgba(108,131,193,0.5);">
                       <h5 class="card-1-text" style="font-size: 18px;">Issued Prescriptions</h5>
-                      <h1 class="card-1-info">5</h1>
+                      <h1 class="card-1-info">-</h1>
                   </div>
               </div>
           </div>
@@ -82,5 +86,86 @@
               <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>
           </div>
       </div>
+  </div>
+
+  <div class="modal fade" role="dialog" tabindex="-1" id="listOfNurses">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="display-6 modal-title">Nurses</h3><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center">
+            <p>List of Nurses within the same ward</p>
+            <img src="assets/img/nursAdmin.png" width="15%">
+          </div>
+          <div>
+            <div>
+              <div class="table-responsive" style="text-align: center;">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Email</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let nurse of nurses">
+                    <td>{{nurse.user_name}}</td>
+                    <td>{{nurse.user_surname}}</td>
+                    <td>{{nurse.user_email}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" role="dialog" tabindex="-1" id="listOfDoctors">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="display-6 modal-title">Doctors</h3><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center">
+            <p>List of Doctors within the same ward</p>
+            <img src="assets/img/nursAdmin.png" width="15%">
+          </div>
+          <div>
+            <div>
+              <div class="table-responsive" style="text-align: center;">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Email</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let doctor of doctors">
+                    <td>{{doctor.user_name}}</td>
+                    <td>{{doctor.user_surname}}</td>
+                    <td>{{doctor.user_email}}</td>
+                    <td [innerHTML]="doctor.user_id === user_id ? '<strong>(You)</strong>' : ''"></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>
+      </div>
+    </div>
   </div>
 </div>
