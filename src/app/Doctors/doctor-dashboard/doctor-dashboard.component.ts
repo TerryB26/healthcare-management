@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import { environment } from '../../../environments/environment';
+import {DatePipe, NgForOf} from "@angular/common";
+import {FormsModule, NgForm} from "@angular/forms";
+import { Router } from '@angular/router';
+import Swal from "sweetalert2";
+
 
 
 @Component({
@@ -20,8 +26,13 @@ export class DoctorDashboardComponent {
   doctorCount: any;
   patientsCount: any;
   patients: any;
+  conditionsData: any;
+  showSuccessMessage = false;
 
-  constructor(private http: HttpClient) { }
+  conditionID : any;
+  fileID: any;
+
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.ward_id = this.user.doctor_ward_id;
@@ -41,7 +52,6 @@ export class DoctorDashboardComponent {
       this.patients = response;
       this.patientsCount = this.patients.length;
     });
-
 
   }
 
@@ -68,4 +78,47 @@ export class DoctorDashboardComponent {
     return this.http.get(`${environment.baseUrl}api/patients`, { params });
   }
 
+  getPatientsConditions(condition_id?: number) {
+    let params = new HttpParams();
+    if (condition_id) {
+      params = params.append('condition_id', condition_id.toString());
+    }
+    return this.http.get(`${environment.baseUrl}api/health-conditions`, { params });
+  }
+
+  openModal(file_id: any, condition_id: any) {
+    this.fileID = file_id;
+    this.conditionID = condition_id;
+
+    this.getPatientsConditions(condition_id).subscribe(response => {
+      this.conditionsData = response;
+
+    });
+
+  }
+
+  onSubmit(updateConditionForm: NgForm) {
+    this.sendData(updateConditionForm.value);
+  }
+
+  sendData(formData: any) {
+    this.http.put(`http://localhost:3000/api/update-patient-status/${this.fileID}`, formData).subscribe(response => {
+      Swal.fire({
+        title: 'Success!',
+        text: 'Successfully Updated Patient File',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2500
+      }).then(() => {
+        this.router.navigate(['/Doctor/Dashboard']);
+      });
+      // Refetch the patient data
+      this.getPatientsData(this.ward_id).subscribe(response => {
+        this.patients = response;
+      });
+    }, error => {
+      console.error(error);
+      this.showSuccessMessage = false;
+    });
+  }
 }
