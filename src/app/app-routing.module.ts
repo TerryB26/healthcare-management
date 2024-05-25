@@ -19,6 +19,7 @@ import { NurseDashboardComponent } from './Nurses/nurse-dashboard/nurse-dashboar
 import {PatientDashboardComponent} from "./Patients/patient-dashboard/patient-dashboard.component";
 import {AuthGuard} from "./auth.guard";
 import {AddPatientComponent} from "./Admin/Users/add-patient/add-patient.component";
+import {UpdateFileComponent} from "./Doctors/update-file/update-file.component";
 
 
 const routes: Routes = [
@@ -39,6 +40,7 @@ const routes: Routes = [
   {path: 'Admin/Staff/Our-Nurses/:id', component: NurseDetailsComponent ,canActivate : [AuthGuard]},
   //Doctor Site
   {path: 'Doctor/Dashboard', component: DoctorDashboardComponent ,canActivate : [AuthGuard]},
+  {path: 'Doctor/Update-File/:patientReference/:id', component: UpdateFileComponent ,canActivate : [AuthGuard]},
   //Nurse Site
   {path: 'Nurse/Dashboard', component: NurseDashboardComponent ,canActivate : [AuthGuard]},
   //Patient

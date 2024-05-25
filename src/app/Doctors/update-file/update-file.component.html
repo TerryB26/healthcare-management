@@ -1,0 +1,33 @@
+<div class="container nurse-dash">
+  <div class="text-center">
+    <h1>File Name - {{patients[0]?.file_name}}</h1>
+    <div class="div-form card-heading">
+      <p class="text-lead" >Last Updated On: {{getLastPatient()?.file_log_date | date:'medium'}}</p>
+      <p class="text-lead">Last Updated By: {{getLastPatient()?.edited_by}}</p>
+    </div>
+
+  </div>
+  <div style="margin-top: 50px;">
+    <div class="row">
+      <div class="col">
+        <div><img src="assets/img/writeFile2.png" width="100%"></div>
+      </div>
+      <div class="col">
+        <div>
+          <form style="text-align: center;" #updateFileForm="ngForm" (ngSubmit)="onSubmit(updateFileForm)">
+            <textarea
+              class="form-control"
+              style="width: 100%;height: 500px;"
+              name="patientFileDetails"
+              ngModel
+              required
+              #patientFileDetails="ngModel"
+              [value]="patients[0]?.health_details"
+              ></textarea>
+            <button class="btn btn-primary" type="submit" style="width: 200px;margin-top: 20px;">Update Form</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

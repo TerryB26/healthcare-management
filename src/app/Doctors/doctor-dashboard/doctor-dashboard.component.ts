@@ -18,6 +18,8 @@ export class DoctorDashboardComponent {
   user_id: any;
   nurseCount: any;
   doctorCount: any;
+  patientsCount: any;
+  patients: any;
 
   constructor(private http: HttpClient) { }
   ngOnInit(): void {
@@ -33,6 +35,11 @@ export class DoctorDashboardComponent {
     this.getData(this.ward_id).subscribe(response => {
       this.nurses = response;
       this.nurseCount = this.nurses.length;
+    });
+
+    this.getPatientsData(this.ward_id).subscribe(response => {
+      this.patients = response;
+      this.patientsCount = this.patients.length;
     });
 
 
@@ -51,6 +58,14 @@ export class DoctorDashboardComponent {
       params = params.append('doctor_ward_id', doctorWardId.toString());
     }
     return this.http.get(`${environment.baseUrl}api/doctors`, { params });
+  }
+
+  getPatientsData(ward_id?: number) {
+    let params = new HttpParams();
+    if (ward_id) {
+      params = params.append('ward_id', ward_id.toString());
+    }
+    return this.http.get(`${environment.baseUrl}api/patients`, { params });
   }
 
 }
