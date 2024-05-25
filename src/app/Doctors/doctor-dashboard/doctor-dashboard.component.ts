@@ -133,7 +133,7 @@ export class DoctorDashboardComponent {
       case 'Guarded':
         return 'orange';
       case 'Stable':
-        return 'lightblue';
+        return 'darkblue';
       case 'Serious':
         return 'red';
       case 'Critical':
