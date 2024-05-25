@@ -18,6 +18,7 @@ import { DoctorDashboardComponent } from './Doctors/doctor-dashboard/doctor-dash
 import { NurseDashboardComponent } from './Nurses/nurse-dashboard/nurse-dashboard.component';
 import {PatientDashboardComponent} from "./Patients/patient-dashboard/patient-dashboard.component";
 import {AuthGuard} from "./auth.guard";
+import {AddPatientComponent} from "./Admin/Users/add-patient/add-patient.component";
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path: 'Admin/Create/Admin-Account', component: AddAdminComponent ,canActivate : [AuthGuard]},
   {path: 'Admin/Create/Doctor-Account', component: AddDoctorComponent ,canActivate : [AuthGuard]},
   {path: 'Admin/Create/Nurse-Account', component: AddNurseComponent ,canActivate : [AuthGuard]},
+  {path: 'Admin/Create/Patient-Account', component: AddPatientComponent ,canActivate : [AuthGuard]},
   //Doctors
   {path: 'Admin/Staff/Our-Doctors/:id', component: DoctorDetailsComponent ,canActivate : [AuthGuard]},
   {path: 'Admin/Staff/Our-Nurses/:id', component: NurseDetailsComponent ,canActivate : [AuthGuard]},

@@ -1,0 +1,40 @@
+.div-form {
+  margin-top: 10px;
+  border-width: 1px;
+  border-style: solid;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.card-heading {
+  background: var(--bs-emphasis-color);
+  padding-bottom: 10px;
+  color: var(--bs-body-bg);
+  border-style: solid;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.card-a {
+  border-radius: 10px;
+  border-width: 2px;
+  border-style: solid;
+  padding-bottom: 20px;
+}
+
+.form-holder {
+}
+
+.input-field {
+  border-color: var(--bs-emphasis-color);
+  border-radius: 10px;
+  width: 90%;
+  margin-left: 5%;
+  margin-bottom: 10px;
+}
+
+.row-form {
+  margin-bottom: 20px;
+}
+

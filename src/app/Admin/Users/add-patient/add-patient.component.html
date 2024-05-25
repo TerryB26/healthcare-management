@@ -1,0 +1,282 @@
+<div class="container">
+  <div class="text-center">
+    <h1>Patient Admission</h1>
+    <p>Add Patient</p><img src="assets/img/patientForm.png" width="10%">
+  </div>
+  <div class="div-form">
+    <form #addPatientForm="ngForm" (ngSubmit)="onSubmit(addPatientForm)">
+      <div class="row row-form">
+        <div class="col">
+          <div class="text-center card-a">
+            <h1 class="display-6 card-heading">Details</h1>
+
+            <select class="form-select input-field"
+                    name="patient_title"
+                    id="patient_title"
+                    ngModel
+                    #patient_title="ngModel">
+              <option value="" selected>Select Title</option>
+              <option value="MR">MR</option>
+              <option value="MRS">MRS</option>
+              <option value="MS">MS</option>
+              <option value="DR">DR</option>
+            </select>
+
+            <input class="form-control input-field "
+                   type="text"
+                   name="patientSurname"
+                   id="patientSurname"
+                   ngModel
+                   required
+                   #patientSurname="ngModel"
+                   placeholder="Surname"
+                   [(ngModel)]="userSurname"
+                   (ngModelChange)="onUserSurnameChange()">
+
+            <input class="form-control input-field"
+                   type="text"
+                   name="patientName"
+                   id="patientName"
+                   ngModel
+                   required
+                   #patientName="ngModel"
+                   placeholder="Names">
+
+            <input class="form-control form-input input-field"
+                   type="text"
+                   placeholder="Email Address"
+                   name="user_email"
+                   id="user_email"
+                   [(ngModel)]="fullEmail"
+                   readonly
+                   required
+                   #user_email="ngModel">
+
+            <input class="form-control input-field"
+                   type="text"
+                   name="patientIdNumber"
+                   placeholder="13 Digits ID Number"
+                   minlength="13"
+                   maxlength="13"
+                   id="patientIdNumber"
+                   ngModel
+                   required
+                   #patientIdNumber="ngModel">
+
+            <select class="form-select input-field"
+                    name="patientLanguage"
+                    id="patientLanguage"
+                    ngModel
+                    required
+                    #patientLanguage="ngModel">
+
+              <option value="" selected>Select Language</option>
+              <option value="afrikaans">Afrikaans</option>
+              <option value="english">English</option>
+              <option value="ndebele">Ndebele</option>
+              <option value="northern sotho">Northern Sotho</option>
+              <option value="sotho">Sotho</option>
+              <option value="swati">Swati</option>
+              <option value="tsonga">Tsonga</option>
+              <option value="tswana">Tswana</option>
+              <option value="venda">Venda</option>
+              <option value="xhosa">Xhosa</option>
+              <option value="isizulu">IsiZulu</option>
+            </select>
+
+            <select class="form-select input-field"
+                    name="maritalStatus"
+                    id="maritalStatus"
+                    ngModel
+                    required
+                    #maritalStatus="ngModel">
+
+              <option value="" selected>Select Marital Status</option>
+              <option value="single">Single</option>
+              <option value="married">Married</option>
+              <option value="divorced">Divorced</option>
+              <option value="widowed">Widowed</option>
+            </select>
+
+          </div>
+        </div>
+        <div class="col">
+          <div class="text-center card-a">
+            <h1 class="display-6 card-heading">Next Of Kin</h1>
+
+            <input class="form-control input-field"
+                   type="text"
+                   name="nokRelationship"
+                   placeholder="Relationship"
+                   id="nokRelationship"
+                   ngModel
+                   required
+                   #nokRelationship="ngModel">
+
+            <input class="form-control input-field"
+                   type="text"
+                   name="nokNameSurname"
+                   placeholder="Name &amp; Surname"
+                   id="nokNameSurname"
+                   ngModel
+                   required
+                   #nokNameSurname="ngModel">
+
+            <input class="form-control input-field"
+                   type="text"
+                   name="nokContactNo"
+                   placeholder="Phone Number"
+                   id="nokContactNo"
+                   ngModel
+                   required
+                   #nokContactNo="ngModel"
+                    minlength="10"
+                    maxlength="10"
+                    >
+
+            <input class="form-control input-field"
+                   type="text"
+                   name="nokAltContactNo"
+                   placeholder="Alternative  Phone Number"
+                   id="nokAltContactNo"
+                   ngModel
+                   required
+                   #nokAltContactNo="ngModel"
+                    minlength="10"
+                    maxlength="10"
+                    >
+
+          </div>
+        </div>
+      </div>
+      <div class="row row-form">
+        <div class="col">
+          <div class="text-center card-a">
+            <h1 class="display-6 card-heading">Address</h1>
+
+            <input class="form-control input-field"
+                   type="text"
+                   name="patientAddress"
+                   placeholder="Address"
+                   id="patientAddress"
+                   ngModel
+                   required
+                   #patientAddress="ngModel">
+
+            <input class="form-control input-field"
+                   type="text"
+                   name="patientTown"
+                   placeholder="Town"
+                   id="patientTown"
+                   ngModel
+                   required
+                   #patientTown="ngModel">
+
+            <input class="form-control input-field"
+                   type="text"
+                   name="patientAreaCode"
+                   placeholder="Code"
+                   id="patientAreaCode"
+                   ngModel
+                   required
+                   #patientAreaCode="ngModel">
+
+            <select class="form-select input-field"
+                    name="patientProvince"
+                    id="patientProvince"
+                    ngModel
+                    required
+                    #patientProvince="ngModel">
+
+              <option value="" selected>Select Province</option>
+              <option value="eastern cape">Eastern Cape</option>
+              <option value="free state">Free State</option>
+              <option value="gauteng">Gauteng</option>
+              <option value="kwazulu-natal">KwaZulu-Natal</option>
+              <option value="limpopo">Limpopo</option>
+              <option value="mpumalanga">Mpumalanga</option>
+              <option value="north west">North West</option>
+              <option value="northern cape">Northern Cape</option>
+              <option value="western cape">Western Cape</option>
+            </select>
+
+          </div>
+        </div>
+        <div class="col">
+          <div class="text-center card-a">
+            <h1 class="display-6 card-heading">Department</h1>
+            <p class="lead text-danger">To be sent to which department&nbsp;</p>
+
+            <select class="form-select input-field"
+                    name="patientWardID"
+                    id="patientWardID"
+                    ngModel
+                    required
+                    #patientWardID="ngModel">
+
+              <option value="" disabled selected>Choose A Ward</option>
+              <option *ngFor="let ward of wardsData"
+                      [value]="ward.ward_id">{{ ward.ward_name }} -- {{ ward.department_name }}
+              </option>
+            </select>
+
+            <textarea class="form-control input-field"
+                      name="admissionReason"
+                      placeholder="Reason For Admission"
+                      id="admissionReason"
+                      ngModel
+                      required
+                      #admissionReason="ngModel">
+            </textarea>
+
+          </div>
+        </div>
+      </div>
+      <div class="row row-form">
+        <div class="col">
+          <div class="text-center card-a">
+            <h1 class="display-6 card-heading">Medical History</h1>
+
+            <select class="form-select input-field"
+                    name="patientConditionID"
+                    id="patientConditionID"
+                    ngModel
+                    required
+                    #patientConditionID="ngModel">
+
+              <option value="" disabled selected>Select Patient's Condition</option>
+              <option *ngFor="let condition of conditionsData"
+                      [value]="condition.condition_id">{{ condition.condition_name }} -- {{ condition.condition_description }}
+              </option>
+            </select>
+
+            <textarea class="form-control input-field"
+                      name="patientMedicalHistory"
+                      placeholder="Medical History"
+                      id="patientMedicalHistory"
+                      ngModel
+                      required
+                      #patientMedicalHistory="ngModel">
+            </textarea>
+
+            <textarea class="form-control input-field"
+                      name="patientPrevTreatment"
+                      placeholder="Previous Treatment"
+                      id="patientPrevTreatment"
+                      ngModel
+                      required
+                      #patientPrevTreatment="ngModel">
+            </textarea>
+
+          </div>
+        </div>
+      </div>
+      <div class="row text-center row-form">
+        <div class="col">
+          <button
+            class="btn btn-dark"
+            type="submit" [disabled]="addPatientForm.invalid">Submit Form</button></div>
+      </div>
+    </form>
+  </div>
+</div>
