@@ -121,4 +121,25 @@ export class DoctorDashboardComponent {
       this.showSuccessMessage = false;
     });
   }
+
+  getConditionColor(condition: string): string {
+    switch (condition) {
+      case 'Satisfactory':
+        return 'green';
+      case 'Good':
+        return 'lightgreen';
+      case 'Fair':
+        return 'gold';
+      case 'Guarded':
+        return 'orange';
+      case 'Stable':
+        return 'lightblue';
+      case 'Serious':
+        return 'red';
+      case 'Critical':
+        return 'darkred';
+      default:
+        return 'black';
+    }
+  }
 }

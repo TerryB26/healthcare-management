@@ -62,7 +62,7 @@
                                   <thead>
                                       <tr>
                                         <th>Name & Surname</th>
-                                        <th>Email</th>
+                                        <th>Reference</th>
                                         <th>Admitted On</th>
                                         <th>Admitted For</th>
                                         <th>Current Condition</th>
@@ -72,10 +72,10 @@
                                   <tbody>
                                       <tr *ngFor="let patient of patients">
                                         <td>{{patient.user_name}} {{patient.user_surname}}</td>
-                                        <td>{{patient.user_email}}</td>
+                                        <td>{{patient.user_reference}}</td>
                                         <td>{{patient.join_date | date:'medium'}}</td>
                                         <td>{{patient.admission_reason | slice:0:20}}</td>
-                                        <td>{{patient.condition_name}}</td>
+                                        <td [ngStyle]="{'color': getConditionColor(patient.condition_name)}"><strong>{{patient.condition_name}}</strong></td>
                                           <td>
                                            <a [routerLink]="['/Doctor/Update-File/', patient.user_reference,patient.file_id]"><span data-bs-toggle="tooltip" data-bss-tooltip="" style="margin-right: 20px;" title="Open File"><i class="fa fa-book" style="font-size: 20px;"></i></span></a>
                                             <a (click)="openModal(patient.file_id, patient.condition_id)" style="color: inherit;text-decoration: none;" data-bs-target="#updateStatus" data-bs-toggle="modal" > <span style="margin-right: 20px;"><i class="fa fa-hourglass-2" data-bs-toggle="tooltip" data-bss-tooltip="" style="font-size: 20px;" title="Update Status"></i></span> </a>
