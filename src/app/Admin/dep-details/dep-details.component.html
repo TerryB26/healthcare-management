@@ -25,7 +25,7 @@
                       <div class="card ward-card-01" *ngFor="let data of data">
                         <div class="card-body">
                           <h4 class="card-title">{{ data.ward_name }}</h4>
-                          <h6 class="card-title">Room Number:&nbsp;</h6>
+                          <h6 class="card-title">Room Number:&nbsp;{{data.room_number}}</h6>
                           <p class="card-text"><strong><span style="background-color: rgb(248, 249, 252);">Description</span></strong><span style="font-weight: normal !important; background-color: rgb(248, 249, 252);">: {{ data.ward_description }}</span></p>
                           <p class="card-text"><span style="background-color: rgb(248, 249, 252);">Number Of Beds / Chairs: {{ data.ward_capacity }}</span></p>
 <!--                          <p class="card-text"><span style="background-color: rgb(248, 249, 252);">Number Of Nurses: 5</span></p>-->

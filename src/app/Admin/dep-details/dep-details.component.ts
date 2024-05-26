@@ -24,7 +24,6 @@ export class DepDetailsComponent implements OnInit {
   getData(id: string): void {
     this.http.get(`${environment.baseUrl}api/department-details/${id}`).subscribe(response => {
       this.data = response;
-      console.log(this.data);
     }, error => {
       console.error('There was an error!', error);
     });
