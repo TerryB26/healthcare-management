@@ -28,15 +28,21 @@ export class DoctorDashboardComponent {
   patients: any;
   conditionsData: any;
   showSuccessMessage = false;
-
   conditionID : any;
   fileID: any;
+  patientID: any;
+  created_by: any;
+  appointments: any;
+  appointmentCount: any;
+  doctorLicense: any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
+
     this.ward_id = this.user.doctor_ward_id;
     this.user_id = this.user.user_id;
+    this.doctorLicense = this.user.doctor_license_number;
 
     this.getDoctorData(this.ward_id).subscribe(response => {
       this.doctors = response;
@@ -51,6 +57,13 @@ export class DoctorDashboardComponent {
     this.getPatientsData(this.ward_id).subscribe(response => {
       this.patients = response;
       this.patientsCount = this.patients.length;
+    });
+
+    this.getAppointments(this.doctorLicense).subscribe(response => {
+      this.appointments = response;
+      console.log(this.appointments)
+      this.appointmentCount = this.appointments.length;
+      console.log(this.appointmentCount)
     });
 
   }
@@ -86,13 +99,20 @@ export class DoctorDashboardComponent {
     return this.http.get(`${environment.baseUrl}api/health-conditions`, { params });
   }
 
+  getAppointments(doctor_license_number?: number) {
+    let params = new HttpParams();
+    if (doctor_license_number) {
+      params = params.append('doctor_license_number', doctor_license_number.toString());
+    }
+    return this.http.get(`${environment.baseUrl}api/appointments`, { params });
+  }
+
   openModal(file_id: any, condition_id: any) {
     this.fileID = file_id;
     this.conditionID = condition_id;
 
     this.getPatientsConditions(condition_id).subscribe(response => {
       this.conditionsData = response;
-
     });
 
   }
@@ -102,7 +122,7 @@ export class DoctorDashboardComponent {
   }
 
   sendData(formData: any) {
-    this.http.put(`http://localhost:3000/api/update-patient-status/${this.fileID}`, formData).subscribe(response => {
+    this.http.put(`${environment.baseUrl}api/update-patient-status/${this.fileID}`, formData).subscribe(response => {
       Swal.fire({
         title: 'Success!',
         text: 'Successfully Updated Patient File',
@@ -133,7 +153,7 @@ export class DoctorDashboardComponent {
       case 'Guarded':
         return 'orange';
       case 'Stable':
-        return 'darkblue';
+        return 'blue';
       case 'Serious':
         return 'red';
       case 'Critical':
@@ -141,5 +161,37 @@ export class DoctorDashboardComponent {
       default:
         return 'black';
     }
+  }
+
+  appointModal(patient_id: any) {
+    this.patientID = patient_id;
+    console.log(this.patientID)
+  }
+
+  onSubmitAppointment(bookAppointmentForm: NgForm) {
+    bookAppointmentForm.value.patient_id = this.patientID;
+    bookAppointmentForm.value.created_by = this.created_by;
+    this.sendAppointmentData(bookAppointmentForm.value);
+  }
+
+  private sendAppointmentData(formData: any) {
+    this.http.post(`${environment.baseUrl}api/create-appointment`, formData).subscribe(response => {
+      Swal.fire({
+        title: 'Success!',
+        text: 'Successfully Updated Patient File',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2500
+      }).then(() => {
+        this.router.navigate(['/Doctor/Dashboard']);
+      });
+      // Refetch the patient data
+      this.getPatientsData(this.ward_id).subscribe(response => {
+        this.patients = response;
+      });
+    }, error => {
+      console.error(error);
+      this.showSuccessMessage = false;
+    });
   }
 }

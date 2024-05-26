@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import { environment } from '../../../environments/environment';
@@ -19,6 +19,7 @@ import Swal from "sweetalert2";
   styleUrl: './update-file.component.css'
 })
 export class UpdateFileComponent {
+  id: any;
   patientsCount: any;
   patients: any = [];
   user_email: any;
@@ -27,7 +28,7 @@ export class UpdateFileComponent {
   showSuccessMessage = false;
   user: any;
   length: any;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
 
@@ -35,7 +36,7 @@ export class UpdateFileComponent {
       this.patientReference = params['patientReference'];
       this.fileID = params['id'];
 
-      // Now you can use patientReference
+      this.cdr.detectChanges();
     });
 
     this.getPatientsData(this.fileID).subscribe(response => {
@@ -69,7 +70,7 @@ export class UpdateFileComponent {
 
 
   sendData(formData: any) {
-    this.http.put(`http://localhost:3000/api/update-patient-file/${this.fileID}`, formData).subscribe(response => {
+    this.http.put(`${environment.baseUrl}api/update-patient-file/${this.fileID}`, formData).subscribe(response => {
       Swal.fire({
         title: 'Success!',
         text: 'Successfully Updated Patient File',

@@ -26,7 +26,8 @@
               </div>
           </div>
           <div class="row card-section" style="border-style: none;">
-              <div class="col"><a href="#" style="color: inherit;text-decoration: none;" data-bs-target="#listOfDoctors" data-bs-toggle="modal">
+              <div class="col">
+                <a href="#" style="color: inherit;text-decoration: none;" data-bs-target="#listOfDoctors" data-bs-toggle="modal">
                   <div data-bss-hover-animate="pulse" class="card-1" style="background: rgba(108,131,193,0.5);">
                       <h5 class="card-1-text" style="font-size: 18px;">Doctors In Ward</h5>
                       <h1 class="card-1-info">{{doctorCount}}</h1>
@@ -34,10 +35,12 @@
                 </a>
               </div>
               <div class="col">
+                <a href="#" style="color: inherit;text-decoration: none;" data-bs-target="#listOfApp" data-bs-toggle="modal">
                   <div data-bss-hover-animate="pulse" class="card-1" style="background: rgba(108,131,193,0.5);">
-                      <h5 class="card-1-text" style="font-size: 18px;">Issued Prescriptions</h5>
-                      <h1 class="card-1-info">-</h1>
+                      <h5 class="card-1-text" style="font-size: 18px;">Appointments In Total</h5>
+                      <h1 class="card-1-info">{{appointmentCount}}</h1>
                   </div>
+                </a>
               </div>
           </div>
       </div>
@@ -77,10 +80,11 @@
                                         <td>{{patient.admission_reason | slice:0:20}}</td>
                                         <td [ngStyle]="{'color': getConditionColor(patient.condition_name)}"><strong>{{patient.condition_name}}</strong></td>
                                           <td>
-                                           <a [routerLink]="['/Doctor/Update-File/', patient.user_reference,patient.file_id]"><span data-bs-toggle="tooltip" data-bss-tooltip="" style="margin-right: 20px;" title="Open File"><i class="fa fa-book" style="font-size: 20px;"></i></span></a>
+                                           <a [routerLink]="['/Update-File/', patient.user_reference,patient.file_id]"><span data-bs-toggle="tooltip" data-bss-tooltip="" style="margin-right: 20px;" title="Open File"><i class="fa fa-book" style="font-size: 20px;"></i></span></a>
                                             <a (click)="openModal(patient.file_id, patient.condition_id)" style="color: inherit;text-decoration: none;" data-bs-target="#updateStatus" data-bs-toggle="modal" > <span style="margin-right: 20px;"><i class="fa fa-hourglass-2" data-bs-toggle="tooltip" data-bss-tooltip="" style="font-size: 20px;" title="Update Status"></i></span> </a>
                                             <span data-bs-toggle="tooltip" data-bss-tooltip="" style="margin-right: 20px;" title="Book An Appointment"><i class="fa fa-calendar-o" style="font-size: 20px;"></i></span>
-                                            <span style="margin-right: 20px;"><i class="fa fa-sign-out" data-bs-toggle="tooltip" data-bss-tooltip="" style="font-size: 20px;" title="Discharge"></i></span></td>
+                                            <span style="margin-right: 20px;"><i class="fa fa-sign-out" data-bs-toggle="tooltip" data-bss-tooltip="" style="font-size: 20px;" title="Discharge"></i></span>
+                                          </td>
                                       </tr>
                                   </tbody>
                               </table>
@@ -198,6 +202,142 @@
                 </option>
               </select>
               <button class="btn btn-primary" type="submit">Update</button></form>
+          </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" role="dialog" tabindex="-1" id="bookAppointment">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="display-6 modal-title">Schedule Appointment</h3><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <div class="text-center">
+              <p>Schedule an appointment with for the patient</p><img src="assets/img/nursAppoint.png" width="20%">
+            </div>
+            <div>
+              <section class="position-relative py-4 py-xl-5">
+                <div class="container">
+                  <div class="row d-flex justify-content-center">
+                    <div class="col-md-6 col-xl-4">
+                      <div class="card mb-5" style="border-color: rgb(0,1,65);">
+                        <div class="card-body d-flex flex-column align-items-center" style="border-style: none;border-color: rgb(0,1,65);">
+
+                          <form style="width: 250px;" class="text-center" #bookAppointmentForm="ngForm" (ngSubmit)="onSubmitAppointment(bookAppointmentForm)">
+                            <div class="mb-3">
+
+                              <select class="form-select input-field"
+                                      name="doctorID"
+                                      id="doctorID"
+                                      ngModel
+                                      required
+                                      #doctorID="ngModel">
+                                <option value="" disabled selected>Select A Doctor</option>
+                                <option *ngFor="let doctor of doctors"
+                                        [value]="doctor.doctor_id">
+                                  {{doctor.user_name}} {{doctor.user_surname}} - {{doctor.user_email}}
+                                </option>
+                              </select>
+
+                            </div>
+                            <div class="mb-3">
+                              <input class="form-control"
+                                     name="appointmentDate"
+                                     id="appointmentDate"
+                                     ngModel
+                                     required
+                                     #appointmentDate="ngModel"
+                                     type="date">
+                            </div>
+
+                            <div class="mb-3">
+
+                              <select class="form-select"
+                                      name="appointmentTime"
+                                      id="appointmentTime"
+                                      ngModel
+                                      required
+                                      #appointmentTime="ngModel"
+                              >
+
+                                <option value="" disabled selected>Select a Time</option>
+                                <option *ngFor="let i of '. '.repeat(13).split(''); let idx = index" [value]="(8 + idx < 10 ? '0' : '') + (8 + idx) + ':00'">
+                                  {{ (8 + idx < 10 ? '0' : '') + (8 + idx) + ':00' }} {{ 8 + idx < 12 ? 'am' : 'pm' }}
+                                </option>
+
+                              </select>
+
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control"
+                                          name="appointmentReason"
+                                          id="appointmentReason"
+                                          ngModel
+                                          required
+                                          #appointmentReason="ngModel"
+                                          placeholder="Reason for appointment">
+
+                                </textarea>
+                            </div>
+
+                            <div class="mb-3">
+                              <button class="btn btn-primary d-block w-100" type="submit" style="background: rgb(93,116,228);color: var(--bs-body-bg);font-weight: bold;border-color: #000141;">Schedule Appointment</button>
+                            </div>
+                          </form>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" role="dialog" tabindex="-1" id="listOfApp">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="display-6 modal-title">Appointments</h3><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center">
+            <p>List of appointments</p><img src="assets/img/nursAppoint.png" width="15%">
+          </div>
+          <div>
+            <div>
+              <div class="table-responsive" style="text-align: center;">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th>Patient Reference</th>
+                    <th>Date & Time</th>
+                    <th>Reason</th>
+                    <th>Created By</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let appointment of appointments">
+                    <td>{{appointment.user_reference}}</td>
+                    <td>{{appointment.appointment_date | date:'mediumDate'}} at {{appointment.appointment_time}}</td>
+                    <td>{{appointment.appointment_reason | slice:0:20}}</td>
+                    <td>{{appointment.created_by}}</td>
+
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
         <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>

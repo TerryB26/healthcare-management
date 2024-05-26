@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import { environment } from '../../../environments/environment';
+import {DatePipe, NgForOf} from "@angular/common";
+import {FormsModule, NgForm} from "@angular/forms";
+import { Router } from '@angular/router';
+import Swal from "sweetalert2";
 @Component({
   selector: 'app-nurse-dashboard',
   templateUrl: './nurse-dashboard.component.html',
@@ -17,12 +22,21 @@ export class NurseDashboardComponent {
   doctorCount: any;
   patientsCount: any;
   patients: any;
+  conditionsData: any;
+  showSuccessMessage = false;
+  conditionID : any;
+  fileID: any;
 
-  constructor(private http: HttpClient) { }
+  patientID: any;
+  created_by: any;
+
+
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.ward_id = this.user.nurse_ward_id;
     this.user_id = this.user.user_id;
+    this.created_by = this.user.user_email;
 
     this.getDoctorData(this.ward_id).subscribe(response => {
       this.doctors = response;
@@ -36,6 +50,7 @@ export class NurseDashboardComponent {
 
     this.getPatientsData(this.ward_id).subscribe(response => {
       this.patients = response;
+
       this.patientsCount = this.patients.length;
     });
 
@@ -63,5 +78,102 @@ export class NurseDashboardComponent {
       params = params.append('ward_id', ward_id.toString());
     }
     return this.http.get(`${environment.baseUrl}api/patients`, { params });
+  }
+
+  getPatientsConditions(condition_id?: number) {
+    let params = new HttpParams();
+    if (condition_id) {
+      params = params.append('condition_id', condition_id.toString());
+    }
+    return this.http.get(`${environment.baseUrl}api/health-conditions`, { params });
+  }
+
+  openModal(file_id: any, condition_id: any) {
+    this.fileID = file_id;
+    this.conditionID = condition_id;
+
+    this.getPatientsConditions(condition_id).subscribe(response => {
+      this.conditionsData = response;
+
+    });
+
+  }
+
+  onSubmit(updateConditionForm: NgForm) {
+    this.sendData(updateConditionForm.value);
+  }
+
+  sendData(formData: any) {
+    this.http.put(`${environment.baseUrl}api/update-patient-status/${this.fileID}`, formData).subscribe(response => {
+      Swal.fire({
+        title: 'Success!',
+        text: 'Successfully Updated Patient File',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2500
+      }).then(() => {
+        this.router.navigate(['/Nurse/Dashboard']);
+      });
+      // Refetch the patient data
+      this.getPatientsData(this.ward_id).subscribe(response => {
+        this.patients = response;
+      });
+    }, error => {
+      console.error(error);
+      this.showSuccessMessage = false;
+    });
+  }
+
+  getConditionColor(condition: string): string {
+    switch (condition) {
+      case 'Satisfactory':
+        return 'green';
+      case 'Good':
+        return 'lightgreen';
+      case 'Fair':
+        return 'gold';
+      case 'Guarded':
+        return 'orange';
+      case 'Stable':
+        return 'blue';
+      case 'Serious':
+        return 'red';
+      case 'Critical':
+        return 'darkred';
+      default:
+        return 'black';
+    }
+  }
+
+  appointModal(patient_id: any) {
+    this.patientID = patient_id;
+    console.log(this.patientID)
+  }
+
+  onSubmitAppointment(bookAppointmentForm: NgForm) {
+    bookAppointmentForm.value.patient_id = this.patientID;
+    bookAppointmentForm.value.created_by = this.created_by;
+    this.sendAppointmentData(bookAppointmentForm.value);
+  }
+
+  private sendAppointmentData(formData: any) {
+    this.http.post(`${environment.baseUrl}api/create-appointment`, formData).subscribe(response => {
+      Swal.fire({
+        title: 'Success!',
+        text: 'Successfully Updated Patient File',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2500
+      }).then(() => {
+        this.router.navigate(['/Nurse/Dashboard']);
+      });
+      // Refetch the patient data
+      this.getPatientsData(this.ward_id).subscribe(response => {
+        this.patients = response;
+      });
+    }, error => {
+      console.error(error);
+      this.showSuccessMessage = false;
+    });
   }
 }

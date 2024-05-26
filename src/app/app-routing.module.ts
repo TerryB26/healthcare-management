@@ -40,7 +40,7 @@ const routes: Routes = [
   {path: 'Admin/Staff/Our-Nurses/:id', component: NurseDetailsComponent ,canActivate : [AuthGuard]},
   //Doctor Site
   {path: 'Doctor/Dashboard', component: DoctorDashboardComponent ,canActivate : [AuthGuard]},
-  {path: 'Doctor/Update-File/:patientReference/:id', component: UpdateFileComponent ,canActivate : [AuthGuard]},
+  {path: 'Update-File/:patientReference/:id', component: UpdateFileComponent ,canActivate : [AuthGuard]},
   //Nurse Site
   {path: 'Nurse/Dashboard', component: NurseDashboardComponent ,canActivate : [AuthGuard]},
   //Patient
