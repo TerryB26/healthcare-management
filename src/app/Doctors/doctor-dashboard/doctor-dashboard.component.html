@@ -82,7 +82,7 @@
                                           <td>
                                            <a [routerLink]="['/Update-File/', patient.user_reference,patient.file_id]"><span data-bs-toggle="tooltip" data-bss-tooltip="" style="margin-right: 20px;" title="Open File"><i class="fa fa-book" style="font-size: 20px;"></i></span></a>
                                             <a (click)="openModal(patient.file_id, patient.condition_id)" style="color: inherit;text-decoration: none;" data-bs-target="#updateStatus" data-bs-toggle="modal" > <span style="margin-right: 20px;"><i class="fa fa-hourglass-2" data-bs-toggle="tooltip" data-bss-tooltip="" style="font-size: 20px;" title="Update Status"></i></span> </a>
-                                            <span data-bs-toggle="tooltip" data-bss-tooltip="" style="margin-right: 20px;" title="Book An Appointment"><i class="fa fa-calendar-o" style="font-size: 20px;"></i></span>
+                                            <a (click)="appointModal(patient.patient_id)" style="color: inherit;text-decoration: none;" data-bs-target="#bookAppointment" data-bs-toggle="modal" ><span data-bs-toggle="tooltip" data-bss-tooltip="" style="margin-right: 20px;" title="Book An Appointment"><i class="fa fa-calendar-o" style="font-size: 20px;"></i></span></a>
                                             <span style="margin-right: 20px;"><i class="fa fa-sign-out" data-bs-toggle="tooltip" data-bss-tooltip="" style="font-size: 20px;" title="Discharge"></i></span>
                                           </td>
                                       </tr>
@@ -201,7 +201,7 @@
                         [value]="condition.condition_id">{{ condition.condition_name }} -- {{ condition.condition_description }}
                 </option>
               </select>
-              <button class="btn btn-primary" type="submit">Update</button></form>
+              <button class="btn btn-primary" type="submit" [disabled]="updateConditionForm.invalid">Update</button></form>
           </div>
         </div>
         <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>
@@ -344,6 +344,8 @@
       </div>
     </div>
   </div>
+
+
 
 
 </div>
