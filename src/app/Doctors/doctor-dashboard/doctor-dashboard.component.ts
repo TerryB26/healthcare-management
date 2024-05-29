@@ -43,6 +43,7 @@ export class DoctorDashboardComponent {
     this.ward_id = this.user.doctor_ward_id;
     this.user_id = this.user.user_id;
     this.doctorLicense = this.user.doctor_license_number;
+    this.created_by = this.user.user_email;
 
     this.getDoctorData(this.ward_id).subscribe(response => {
       this.doctors = response;
@@ -61,9 +62,7 @@ export class DoctorDashboardComponent {
 
     this.getAppointments(this.doctorLicense).subscribe(response => {
       this.appointments = response;
-      console.log(this.appointments)
       this.appointmentCount = this.appointments.length;
-      console.log(this.appointmentCount)
     });
 
   }
@@ -163,9 +162,21 @@ export class DoctorDashboardComponent {
     }
   }
 
+  getAppStatusColor(appStatus: string): string {
+    switch (appStatus) {
+      case 'Awaiting Approval':
+        return 'gold';
+      case 'Accepted':
+        return 'darkgreen';
+      case 'Declined':
+        return 'darkred';
+      default:
+        return 'black';
+    }
+  }
+
   appointModal(patient_id: any) {
     this.patientID = patient_id;
-    console.log(this.patientID)
   }
 
   onSubmitAppointment(bookAppointmentForm: NgForm) {
@@ -178,17 +189,47 @@ export class DoctorDashboardComponent {
     this.http.post(`${environment.baseUrl}api/create-appointment`, formData).subscribe(response => {
       Swal.fire({
         title: 'Success!',
-        text: 'Successfully Updated Patient File',
+        text: 'Successfully Created Appointment',
         icon: 'success',
         showConfirmButton: false,
         timer: 2500
       }).then(() => {
-        this.router.navigate(['/Doctor/Dashboard']);
+        //refetch appiontments
+        this.getAppointments(this.doctorLicense).subscribe(response => {
+          this.appointments = response;
+          this.appointmentCount = this.appointments.length;
+        });
+        // Refetch the patient data
+        this.getPatientsData(this.ward_id).subscribe(response => {
+          this.patients = response;
+        });
       });
-      // Refetch the patient data
-      this.getPatientsData(this.ward_id).subscribe(response => {
-        this.patients = response;
+    }, error => {
+      console.error(error);
+      this.showSuccessMessage = false;
+    });
+  }
+
+  updateAppStatus(status: string, appointment_id: any) {
+    this.updateStatusData({status, appointment_id});
+  }
+
+  private updateStatusData(formData: any) {
+    this.http.post(`${environment.baseUrl}api/update-appointment-status`, formData).subscribe(response => {
+      Swal.fire({
+        title: 'Success!',
+        text: 'Successfully Updated Appointment Status',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2500
+      }).then(() => {
+        // Refetch the patient data
+        this.getAppointments(this.doctorLicense).subscribe(response => {
+          this.appointments = response;
+          this.appointmentCount = this.appointments.length;
+        });
       });
+
     }, error => {
       console.error(error);
       this.showSuccessMessage = false;

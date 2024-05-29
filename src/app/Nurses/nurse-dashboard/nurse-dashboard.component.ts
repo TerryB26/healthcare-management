@@ -26,9 +26,11 @@ export class NurseDashboardComponent {
   showSuccessMessage = false;
   conditionID : any;
   fileID: any;
-
   patientID: any;
   created_by: any;
+
+  appointments: any;
+  appointmentCount: any;
 
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
@@ -50,9 +52,14 @@ export class NurseDashboardComponent {
 
     this.getPatientsData(this.ward_id).subscribe(response => {
       this.patients = response;
-
       this.patientsCount = this.patients.length;
     });
+
+    this.getAppointments(this.created_by).subscribe(response => {
+      this.appointments = response;console.log(this.appointments);
+      this.appointmentCount = this.appointments.length;
+    });
+
 
 
   }
@@ -153,6 +160,7 @@ export class NurseDashboardComponent {
   onSubmitAppointment(bookAppointmentForm: NgForm) {
     bookAppointmentForm.value.patient_id = this.patientID;
     bookAppointmentForm.value.created_by = this.created_by;
+    console.log(bookAppointmentForm.value);
     this.sendAppointmentData(bookAppointmentForm.value);
   }
 
@@ -175,5 +183,26 @@ export class NurseDashboardComponent {
       console.error(error);
       this.showSuccessMessage = false;
     });
+  }
+
+  getAppointments(createdByEmail?: any) {
+    let params = new HttpParams();
+    if (createdByEmail) {
+      params = params.append('createdByEmail', createdByEmail.toString());
+    }
+    return this.http.get(`${environment.baseUrl}api/appointments`, { params });
+  }
+
+  getAppStatusColor(appStatus: string): string {
+    switch (appStatus) {
+      case 'Awaiting Approval':
+        return 'gold';
+      case 'Accepted':
+        return 'darkgreen';
+      case 'Declined':
+        return 'darkred';
+      default:
+        return 'black';
+    }
   }
 }
