@@ -1,0 +1,26 @@
+.button-drop-sa {
+  text-align: start;
+  height: 0px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.card-1-sa {
+  border-radius: 10px;
+  background: #b4b4b4;
+  border-width: 2px;
+  max-width: 300px;
+  min-width: 150px;
+  border-style: solid;
+  /*position: relative;*/
+  /*z-index: 1;*/
+  /*width: 100px;*/
+  /*height: 100px;*/
+}
+
+.button-dropdown-sa {
+  background: rgb(180,180,180);
+  border: 1px solid var(--bs-emphasis-color);
+  color: var(--bs-emphasis-color);
+}
+

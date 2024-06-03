@@ -35,17 +35,19 @@ role: string | null = null;
           showConfirmButton: false,
           timer: 2500
         }).then(() => {
+          console.log(this.role)
           if (this.role === 'admin') {
             this.router.navigate(['/Admin/Dashboard']);
           } else if (this.role === 'nurse') {
             this.router.navigate(['/Nurse/Dashboard']);
           } else if (this.role === 'doctor') {
             this.router.navigate(['/Doctor/Dashboard']);
+          } else if (this.role === 'sa') {
+            this.router.navigate(['/Super-Admin']);
           } else {
             this.router.navigate(['/user']);
           }
         });
-        console.log(this.role);
       }, error => {
         Swal.fire({
           title: 'Error!',

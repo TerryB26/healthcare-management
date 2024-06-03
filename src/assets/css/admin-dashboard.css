@@ -6,9 +6,11 @@
 
 .stats-card {
   border-style: solid;
+  /*border-color: rgb(238,238,238);*/
   border-color: rgb(199,22,30);
   padding-bottom: 10px;
   padding-top: 0px;
+  /*margin-right: 10px;*/
   margin-bottom: 20px;
   margin-right: 0px;
   margin-left: 0px;

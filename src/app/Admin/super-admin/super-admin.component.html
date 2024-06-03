@@ -1,0 +1,75 @@
+<section>
+  <div class="container">
+    <h1 class="display-3 text-center">Super Admin</h1>
+  </div>
+  <div class="container nurse-dash">
+    <div class="row">
+      <div class="col text-center"><img src="assets/img/super-admin.png" width="50%" style="margin-top: 30px;"></div>
+      <div class="col">
+        <section>
+<!--          <div class="dropdown button-drop-sa"><button class="btn btn-primary dropdown-toggle button-dropdown-sa" aria-expanded="false" data-bs-toggle="dropdown" type="button">Action</button>-->
+<!--            <div class="dropdown-menu" style="background: rgb(197,197,197);">-->
+<!--              <a class="dropdown-item" href="#">Assign Key (Give Privileges)</a>-->
+<!--            </div>-->
+<!--          </div>-->
+        </section>
+        <div class="row card-section" style="border-style: none;">
+          <div class="col">
+            <a style="color: inherit;text-decoration: none;" data-bs-target="#listOfAdmins" data-bs-toggle="modal">
+            <div data-bss-hover-animate="pulse" class="card-1-sa">
+              <h5 class="card-1-text" style="font-size: 18px;">Admins</h5>
+              <h1 class="card-1-info">{{adminCount}}</h1>
+            </div>
+          </a></div>
+          <div class="col"></div>
+        </div>
+        <div class="row card-section" style="border-style: none;">
+          <div class="col"></div>
+          <div class="col"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="modal fade" role="dialog" tabindex="-1" id="listOfAdmins">
+      <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="display-6 modal-title">Admins</h3><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="text-center">
+              <p class="lead text-danger">Only 1 Admin can have privileges to the system&nbsp;</p><img src="assets/img/admins.png" width="15%">
+            </div>
+            <div>
+              <div>
+                <div class="table-responsive" style="text-align: center;">
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th>Reference</th>
+                      <th>Email</th>
+                      <th>Has Privileges?</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let admin of admins">
+                      <td>{{admin.user_reference}}</td>
+                      <td>{{admin.user_email}}</td>
+                      <td>{{admin.base_key ? 'Yes' : 'No'}}</td>
+                      <td *ngIf="!admin.base_key">
+                        <button class="btn btn-primary button-dropdown-sa" type="button" (click)="giveAccessClick(admin.user_id)">Give Access</button>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

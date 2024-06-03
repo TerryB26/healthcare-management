@@ -20,6 +20,7 @@ import {PatientDashboardComponent} from "./Patients/patient-dashboard/patient-da
 import {AuthGuard} from "./auth.guard";
 import {AddPatientComponent} from "./Admin/Users/add-patient/add-patient.component";
 import {UpdateFileComponent} from "./Doctors/update-file/update-file.component";
+import {SuperAdminComponent} from "./Admin/super-admin/super-admin.component";
 
 
 const routes: Routes = [
@@ -47,7 +48,10 @@ const routes: Routes = [
   {path: 'Patient/My-Appointments', component: MyAppointmentsComponent ,canActivate : [AuthGuard]},
   {path: 'Patient/My-Prescriptions', component: MyPrescriptionsComponent ,canActivate : [AuthGuard]},
   {path: 'Patient/Dashboard', component: PatientDashboardComponent ,canActivate : [AuthGuard]},
+  //Super Admin
+  { path: 'Super-Admin', component: SuperAdminComponent},
   { path: '**', redirectTo: '/Login' },
+
 ];
 
 @NgModule({
