@@ -99,7 +99,6 @@ export class SuperAdminComponent {
         // User clicked 'Cancel', perform your action here
       }
     });
-    console.log(user_id)
     this.user_id = user_id;
 
   }
@@ -108,9 +107,8 @@ export class SuperAdminComponent {
     this.http.put(`http://localhost:3000/api/update-base-keys/${userId}`, { base_key: baseKey }).subscribe(response => {
       Swal.fire({
         title: 'Success!',
-        text: 'The Pass key for this admin is ' + this.base_key + ' Please give it to the admin',
-        icon: 'success',
-        confirmButtonText: 'Done'
+        html: `The pass key is: <b style="color:red;">${baseKey}</b> - Please provide it to the admin`,
+        icon: 'success'
       }).then(() => {
         // Re-fetch the patient data
         this.getData().subscribe(response => {
