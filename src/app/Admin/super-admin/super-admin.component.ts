@@ -91,7 +91,6 @@ export class SuperAdminComponent {
             });
           } else {
             this.base_key = this.key[0].base_key;
-            console.log()
             this.sendData(this.base_key, this.user_id);
           }
         });
@@ -109,10 +108,9 @@ export class SuperAdminComponent {
     this.http.put(`http://localhost:3000/api/update-base-keys/${userId}`, { base_key: baseKey }).subscribe(response => {
       Swal.fire({
         title: 'Success!',
-        text: 'Successfully Updated Admin Access',
+        text: 'The Pass key for this admin is ' + this.base_key + ' Please give it to the admin',
         icon: 'success',
-        showConfirmButton: false,
-        timer: 2500
+        confirmButtonText: 'Done'
       }).then(() => {
         // Re-fetch the patient data
         this.getData().subscribe(response => {
