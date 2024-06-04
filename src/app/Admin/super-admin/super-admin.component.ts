@@ -104,7 +104,7 @@ export class SuperAdminComponent {
   }
 
   sendData(baseKey: any, userId: any) {
-    this.http.put(`http://localhost:3000/api/update-base-keys/${userId}`, { base_key: baseKey }).subscribe(response => {
+    this.http.put(`${environment.baseUrl}api/update-base-keys/${userId}`, { base_key: baseKey }).subscribe(response => {
       Swal.fire({
         title: 'Success!',
         html: `The pass key is: <b style="color:red;">${baseKey}</b> - Please provide it to the admin`,
